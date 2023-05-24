@@ -1,0 +1,19 @@
+#include <crails/utils/semantics.hpp>
+#include <crails/cli/conventions.hpp>
+
+std::string traits_classname = Crails::naming_convention.classnames("application_traits");
+std::string user_classname   = Crails::naming_convention.classnames("user");
+std::string user_filename    = Crails::naming_convention.filenames("user");
+std::string group_classname   = Crails::naming_convention.classnames("user_group");
+std::string group_filename    = Crails::naming_convention.filenames("user_group");
+
+// END LINKING
+#pragma once
+#include "<%= user_filename %>.hpp"
+#include "<%= group_filename %>.hpp"
+
+struct <%= traits_classname %>
+{
+  typedef <%= user_classname %> UserModel;
+  typedef <%= group_classname %> UserGroupModel;
+};

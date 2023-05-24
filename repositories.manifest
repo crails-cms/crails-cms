@@ -1,0 +1,19 @@
+: 1
+role: prerequisite
+location: https://github.com/crails-framework/libcrails-cms.git#master
+
+:
+role: prerequisite
+location: https://github.com/crails-framework/libcrails-cli.git#master
+
+:
+role: prerequisite
+location: https://github.com/crails-framework/libcrails-renderer.git#master
+
+:
+role: prerequisite
+location: https://github.com/crails-framework/libcrails-templates.git#master
+
+:
+role: prerequisite
+location: https://github.com/crails-framework/libcrails-semantics.git#master

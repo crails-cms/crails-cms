@@ -1,0 +1,50 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("HomeController");
+std::string parent_class = Crails::naming_convention.classnames("ApplicationController");
+
+// END LINKING
+#include <crails/cms/views/layout.hpp>
+#include "home.hpp"
+#include "app/models/homepage.hpp"
+#include "lib/odb/application-odb.hxx"
+
+using namespace std;
+
+<%= classname %>::<%= classname %>(Crails::Context& context) : <%= parent_class %>(context)
+{
+  vars["layout"] = std::string("layouts/application");
+}
+
+void <%= classname %>::initialize()
+{
+  <%= parent_class %>::initialize();
+  if (!settings)
+    redirect_to("/admin/wizard");
+}
+
+void <%= classname %>::index()
+{
+  if (page)
+  {
+    vars["layout"] = page->get_layout().get_layout_path();
+    render("pages/show", {
+      {"page", reinterpret_cast<const Crails::Cms::Page*>(page.get())}
+    });
+  }
+  else
+    render(TEXT, "No homepage set");
+}
+
+shared_ptr<Crails::Cms::Settings> <%= classname %>::find_settings()
+{
+  shared_ptr<<%= Crails::naming_convention.classnames("SettingsHomepageQuery") %>> query;
+
+  database.find_one(query);
+  if (query)
+  {
+    settings = query->settings;
+    page = query->page;
+  }
+  return settings;
+}

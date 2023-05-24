@@ -1,0 +1,33 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("ApplicationController");
+
+// END LINKING
+#include <crails/cms/views/layout.hpp>
+#include "application.hpp"
+#include "lib/odb/application-odb.hxx"
+
+using namespace std;
+
+<%= classname %>::<%= classname %>(Crails::Context& context) : Crails::Cms::Controller(context)
+{
+}
+
+shared_ptr<Crails::Cms::Settings> <%= classname %>::find_settings()
+{
+  if (!settings)
+  {
+    shared_ptr<<%= Crails::naming_convention.classnames("Settings") %>> result;
+
+    database.find_one(result);
+    settings = result;
+  }
+  return settings;
+}
+
+void <%= classname %>::initialize()
+{
+  Crails::Cms::Controller::initialize();
+  if (settings)
+    vars["layout"] = settings->get_layout().get_layout_path();
+}

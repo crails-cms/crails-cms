@@ -1,0 +1,10 @@
+libs =
+import libs += libcrails-cli%lib{crails-cli}
+import libs += libcrails-renderer%lib{crails-renderer}
+import libs += libcrails-templates%lib{crails-templates}
+import libs += libcrails-semantics%lib{crails-semantics}
+
+exe{crails-cms}: {hxx ixx txx cxx}{**} $libs testscript
+
+cxx.poptions =+ "-I$out_root" "-I$src_root"
+cxx.loptions =+ "-Wl,--start-group"

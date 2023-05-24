@@ -1,0 +1,27 @@
+#include <crails/cli/conventions.hpp>
+
+std::string settings_classname = Crails::naming_convention.classnames("settings");
+std::string page_classname = Crails::naming_convention.classnames("page");
+
+// END LINKING
+#pragma once
+#include "<%= Crails::naming_convention.filenames("settings") %>.hpp"
+#include "<%= Crails::naming_convention.filenames("page") %>.hpp"
+
+#pragma db view object(<%= settings_classname %>) \
+  object(<%= page_classname %> = page left: <%= settings_classname %>::homepage_id == page::id)
+struct <%= Crails::naming_convention.classnames("SettingsHomepageQuery") %>
+{
+  std::string get_database_name() { return ::<%= settings_classname %>().get_database_name(); }
+  Crails::Odb::id_type get_id() const { return settings ? settings->get_id() : ODB_NULL_ID; }
+
+  std::shared_ptr<<%= settings_classname %>> settings;
+  std::shared_ptr<<%= page_classname %>> page;
+
+  #pragma db view object(<%= settings_classname %>) object(<%= page_classname %> inner: <%= settings_classname %>::homepage_id == <%= page_classname %>::id)
+  struct Count
+  {
+    #pragma db column("count(" + <%= settings_classname %>::id + ")")
+    size_t value;
+  };
+};

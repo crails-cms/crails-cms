@@ -1,0 +1,23 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("HomeController");
+std::string parent_class = Crails::naming_convention.classnames("ApplicationController");
+
+// END LINKING
+#pragma once
+#include "application.hpp"
+#include "../models/page.hpp"
+
+class <%= classname %> : public <%= parent_class %>
+{
+public:
+  <%= classname %>(Crails::Context&);
+
+  void initialize();
+  void index();
+
+private:
+  std::shared_ptr<Crails::Cms::Settings> find_settings() override;
+
+  std::shared_ptr<<%= Crails::naming_convention.classnames("Page") %>> page;
+};

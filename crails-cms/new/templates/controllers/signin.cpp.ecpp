@@ -1,0 +1,53 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("SessionController");
+std::string userclass = Crails::naming_convention.classnames("User");
+
+// END LINKING
+#include "signin.hpp"
+
+using namespace std;
+
+<%= classname %>::<%= classname %>(Crails::Context& context) : Super(context)
+{
+}
+
+void <%= classname %>::new_()
+{
+  render("session/new");
+}
+
+void <%= classname %>::on_session_created()
+{
+  if (params["redirect_to"].exists())
+    redirect_to(params["redirect_to"].as<string>());
+  else
+    redirect_to("/");
+}
+
+void <%= classname %>::on_session_destroyed()
+{
+  redirect_to("/");
+}
+
+void <%= classname %>::on_session_not_created()
+{
+  flash["error"] = "Invalid credentials";
+  if (params["redirect_to"].exists())
+    redirect_to(params["redirect_to"].as<string>());
+  else
+    render("session/new");
+}
+
+shared_ptr<<%= userclass %>> <%= classname %>::find_user()
+{
+  shared_ptr<<%= userclass %>> user;
+  Crails::Password password(params["password"].as<string>());;
+
+  database.find_one(
+    user,
+    odb::query<<%= userclass %>>::email == params["email"].as<string>() &&
+    odb::query<<%= userclass %>>::password == password.c_str()
+  );
+  return user;
+}

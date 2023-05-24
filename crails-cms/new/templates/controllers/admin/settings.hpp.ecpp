@@ -1,0 +1,27 @@
+#include <crails/cli/conventions.hpp>
+
+std::string class_name = Crails::naming_convention.classnames("AdminSettingsController");
+std::string super = "Crails::Cms::AdminSettingsController<"
+  + Crails::naming_convention.classnames("User") + ", "
+  + Crails::naming_convention.classnames("Settings") + ", "
+  + Crails::naming_convention.classnames("Page") + ", "
+  + Crails::naming_convention.classnames("AdminApplicationController")
+  + '>';
+
+// END LINKING
+#pragma once
+#include <crails/cms/controllers/admin/settings.hpp>
+#include "application.hpp"
+#include "app/models/user.hpp"
+#include "app/models/settings.hpp"
+#include "app/models/page.hpp"
+
+class <%= class_name %> : public <%= super %>
+{
+  typedef <%= super %> Super;
+public:
+  <%= class_name %>(Crails::Context& context) : Super(context)
+  {
+    vars["local_route"] = "/admin/settings";
+  }
+};

@@ -1,0 +1,4 @@
+std::string @layout_editor_name;
+// END LINKING
+class <%= layout_editor_name %> extends PageEditor.LayoutEditor {
+}

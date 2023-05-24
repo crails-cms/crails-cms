@@ -1,0 +1,18 @@
+#include <crails/cli/conventions.hpp>
+
+std::string menu_classname = Crails::naming_convention.classnames("Menu");
+// END LINKING
+#pragma once
+#include <crails/cms/views/menu.hpp>
+#include "app/models/menu.hpp"
+#include "lib/odb/application-odb.hxx"
+
+class ApplicationMenus : public Crails::Cms::MenuManager
+{
+  SINGLETON_IMPLEMENTATION(ApplicationMenus, Crails::Cms::MenuManager)
+
+  std::shared_ptr<Crails::Cms::Menu> find_menu(const std::string& name) const override
+  {
+    return find_menu_with_type<<%= menu_classname %>>(name);
+  }
+};

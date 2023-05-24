@@ -1,0 +1,28 @@
+#include <crails/utils/semantics.hpp>
+
+std::string @project_name;
+
+// END LINKING
+
+#include "renderers.hpp"
+#include "lib/renderers/<%= Crails::underscore(project_name) %>_html_renderer.hpp"
+#include "lib/renderers/<%= Crails::underscore(project_name) %>_json_renderer.hpp"
+#include <crails/cms/lib/renderers/crails_cms_html_renderer.hpp>
+#include <crails/cms/lib/renderers/crails_cms_json_renderer.hpp>
+#include <crails/cms/views/layout.hpp>
+
+using namespace Crails;
+
+ApplicationRenderers::ApplicationRenderers()
+{
+  const auto& layouts = Crails::Cms::Layouts::singleton::require();
+  CrailsCmsHtmlRenderer html_renderer;
+  CrailsCmsJsonRenderer json_renderer;
+
+  default_format = "text/html";
+  layouts.load_renderers(html_renderer);
+  html_renderer.merge(<%= Crails::camelize(project_name) %>HtmlRenderer());
+  json_renderer.merge(<%= Crails::camelize(project_name) %>JsonRenderer());
+  renderers.push_back(std::make_unique<Crails::HtmlRenderer>(html_renderer));
+  renderers.push_back(std::make_unique<Crails::JsonRenderer>(json_renderer));
+}

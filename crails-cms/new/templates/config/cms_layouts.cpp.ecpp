@@ -1,0 +1,11 @@
+#include "layouts.hpp"
+
+struct DocumentLayout : public Crails::Cms::Layout
+{
+  DocumentLayout() { name = "document"; }
+};
+
+ApplicationLayouts::ApplicationLayouts()
+{
+  layouts.push_back(new DocumentLayout);
+}

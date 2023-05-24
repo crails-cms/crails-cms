@@ -1,0 +1,12 @@
+: 1
+name: crails-cms
+version: 2.0.0
+summary: crails-cms C++ executable
+license: BSD-C3
+description-file: README.md
+url: https://example.org/crails-cms
+email: michael@unetresgrossebite.com
+#build-error-email: michael@unetresgrossebite.com
+depends: * build2 >= 0.15.0
+depends: * bpkg >= 0.15.0
+depends: { libcrails-cli libcrails-renderer libcrails-templates libcrails-semantics } ^2.0.0

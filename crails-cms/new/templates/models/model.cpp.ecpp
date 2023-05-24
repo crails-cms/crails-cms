@@ -1,0 +1,12 @@
+#include <crails/utils/semantics.hpp>
+#include <crails/cli/conventions.hpp>
+
+std::string @resource_name;
+std::string classname = Crails::naming_convention.classnames(resource_name);
+std::string filename = Crails::naming_convention.filenames(resource_name);
+
+// END LINKING
+#include  "<%= filename %>.hpp"
+#include "lib/odb/application-odb.hxx"
+
+odb_instantiable_impl(<%= classname %>)

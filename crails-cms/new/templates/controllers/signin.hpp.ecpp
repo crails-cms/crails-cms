@@ -1,0 +1,29 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("SessionController");
+std::string super = "Crails::SessionController<"
+  + Crails::naming_convention.classnames("User") + ", "
+  + "Crails::Odb::Controller<"
+  + Crails::naming_convention.classnames("ApplicationController") + ">>";
+
+// END LINKING
+#include <crails/signin/session_controller.hpp>
+#include <crails/odb/controller.hpp>
+#include "application.hpp"
+#include "../models/user.hpp"
+#include "lib/odb/application-odb.hxx"
+
+class <%= classname %> : public <%= super %>
+{
+  typedef <%= super %> Super;
+public:
+  <%= classname %>(Crails::Context&);
+
+  void new_();
+  void on_session_created() override;
+  void on_session_destroyed() override;
+  void on_session_not_created() override;
+
+private:
+  std::shared_ptr<<%= Crails::naming_convention.classnames("User") %>> find_user() override;
+};

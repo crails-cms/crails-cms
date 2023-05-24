@@ -1,0 +1,8 @@
+std::string @classname;
+// END LINKING
+  #pragma db view object(<%= classname %>)
+  struct Count
+  {
+    #pragma db column("count(" + <%= classname %>::id + ")")
+    size_t value;
+  };

@@ -1,0 +1,14 @@
+std::string @project_name;
+// END LINKING
+
+/* 
+ * Example:
+ * N.B: font.ttf should be stored in the stylesheets/fonts folder
+
+@font-face {
+  font-family: "Font Family Name";
+  src: url("/cms/plugins/<%= project_name %>/assets/font.ttf") format("truetype");
+  font-weight: normal;
+  font-styke: normal;
+}
+*/

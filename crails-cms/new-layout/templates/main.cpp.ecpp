@@ -1,0 +1,30 @@
+#include <crails/cli/conventions.hpp>
+
+std::string @project_name;
+std::string @assets_classname;
+std::string @renderer_classname;
+
+// END LINKING
+#include "layout.hpp"
+#include "lib/assets.hpp"
+#include "lib/renderers/<%= Crails::naming_convention.filenames(renderer_classname) %>.hpp"
+
+extern "C"
+{
+  Crails::BuiltinAssets* get_assets()
+  {
+    static <%= assets_classname %> assets;
+    return &assets;
+  }
+
+  Crails::Renderer* get_html_renderer()
+  {
+    static <%= renderer_classname %> renderer;
+    return &renderer;
+  }
+
+  Crails::Cms::Layout* create_layout()
+  {
+    return new <%= Crails::naming_convention.classnames(project_name) %>();
+  }
+}

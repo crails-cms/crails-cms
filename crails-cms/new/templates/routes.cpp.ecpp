@@ -1,0 +1,46 @@
+#include <crails/cli/conventions.hpp>
+#define CLASSNAME(name) Crails::naming_convention.classnames(#name)
+#define CMS_ROUTES(method, controller) (std::string("register_cms_routes(") + #method + ", " + CLASSNAME(controller) + ')')
+
+// END LINKING
+#include <crails/router.hpp>
+#include <crails/cms/routes.hpp>
+#include "lib/odb/application-odb.hxx"
+#include "controllers/home.hpp"
+#include "controllers/signin.hpp"
+#include "controllers/page.hpp"
+#include "controllers/admin/page.hpp"
+#include "controllers/admin/user.hpp"
+#include "controllers/admin/user_group.hpp"
+#include "controllers/admin/menu.hpp"
+#include "controllers/admin/settings.hpp"
+#include "controllers/admin/wizard.hpp"
+#include "controllers/admin/attachment.hpp"
+#include "controllers/admin/opengraph.hpp"
+#define register_cms_routes(METHOD, CONTROLLER) \
+  std::bind(&Crails::Cms::Routes::METHOD<CONTROLLER>, &cms_routes, std::ref(*this))
+
+void Crails::Router::initialize()
+{
+  auto& cms_routes = Crails::Cms::Routes::singleton::require();
+
+  match_action("GET", "/", <%= CLASSNAME(HomeController) %>, index);
+  signin_actions("/session", ::<%= CLASSNAME(SessionController) %>);
+
+  Crails::Cms::initialize_cms_routes(*this);
+
+  scope("/pages", <%= CMS_ROUTES(register_page_routes, PageController) %>);
+
+  scope("/admin", [&]()
+  {
+    match_action("GET", "/", <%= CLASSNAME(AdminSettingsController) %>, redirect_to_root);
+    scope("/settings",    <%= CMS_ROUTES(register_settings_admin_routes,    AdminSettingsController) %>);
+    scope("/attachments", <%= CMS_ROUTES(register_attachments_admin_routes, AdminAttachmentController) %>);
+    scope("/menus",       <%= CMS_ROUTES(register_menus_admin_routes,       AdminMenuController) %>);
+    scope("/users",       <%= CMS_ROUTES(register_users_admin_routes,       AdminUserController) %>);
+    scope("/user_groups", <%= CMS_ROUTES(register_user_groups_admin_routes, AdminUserGroupController) %>);
+    scope("/pages",       [&]() { cms_routes.register_page_admin_routes<<%= CLASSNAME(PageController) %>, <%= CLASSNAME(AdminPageController) %>>(*this); });
+    scope("/wizard",      <%= CMS_ROUTES(register_wizard_routes,            AdminWizardController) %>);
+    cms_routes.register_opengraph_routes<OpenGraphController>(*this);
+  });
+}

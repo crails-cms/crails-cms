@@ -1,0 +1,41 @@
+#include <crails/utils/semantics.hpp>
+#include <crails/cli/conventions.hpp>
+
+std::string @resource_name;
+std::string classname = Crails::naming_convention.classnames(resource_name);
+std::string filename = Crails::naming_convention.filenames(resource_name);
+
+// END LINKING
+#include "<%= filename %>.hpp"
+#include "lib/odb/application-odb.hxx"
+
+odb_instantiable_impl(<%= classname %>)
+
+unsigned long <%= classname %>::find_available_flag() const
+{
+  Crails::Odb::Connection database;
+  odb::result<UserGroup> groups;
+  unsigned long candidate_flag = 1;
+
+  database.rollback_on_destruction = false;
+  database.find<UserGroup>(groups, odb::query<UserGroup>(true) + "ORDER BY" + odb::query<UserGroup>::flag);
+  for (const UserGroup& group : groups)
+  {
+    if (group.get_flag() == candidate_flag)
+      candidate_flag *= 2;
+  }
+  return candidate_flag;
+}
+
+void <%= classname %>::purge_flag() const
+{
+  Crails::Odb::Connection database;
+  odb::result<PermissionRule> rules;
+
+  database.find<PermissionRule>(rules);
+  for (PermissionRule rule : rules)
+  {
+    rule.purge_flag(get_flag());
+    database.save(rule);
+  }
+}

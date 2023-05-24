@@ -1,0 +1,13 @@
+#include <crails/cli/conventions.hpp>
+std::string @project_name;
+std::string classname = Crails::naming_convention.classnames(project_name);
+// END LINKING
+#pragma once
+#include <crails/cms/views/layout.hpp>
+
+struct <%= classname %> : public Crails::Cms::Layout
+{
+  <%= classname %>();
+
+  const Crails::Cms::Style& get_style() const override;
+};

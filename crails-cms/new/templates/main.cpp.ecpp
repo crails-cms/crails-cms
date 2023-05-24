@@ -1,0 +1,35 @@
+#include <crails/renderer.hpp>
+#include <crails/router.hpp>
+#include <crails/cipher.hpp>
+#include <crails/cms/views/style.hpp>
+#include <crails/cms/views/admin_menu.hpp>
+#include <crails/cms/routes.hpp>
+#include <crails/icons/fontawesome.hpp>
+#include "config/cms/layouts.hpp"
+#include "config/cms/menus.hpp"
+#include "config/i18n.hpp"
+#include "config/renderers.hpp"
+#include "config/server.hpp"
+
+using namespace std;
+using namespace Crails;
+
+int main(int argc, const char **argv)
+{
+  SingletonInstantiator<ApplicationI18n> translations;
+  SingletonInstantiator<ApplicationMenus> menus;
+  SingletonInstantiator<ApplicationLayouts> layouts;
+  SingletonInstantiator<ApplicationServer> server;
+  SingletonInstantiator<ApplicationRenderers> renderers;
+  SingletonInstantiator<Router> router;
+  SingletonInstantiator<Crails::Cms::Routes> cms_routes;
+  SingletonInstantiator<Crails::Cms::Style> style;
+  SingletonInstantiator<Crails::Cms::AdminMenu> admin_menu;
+  SingletonInstantiator<Crails::FontAwesome::V5> icon_theme;
+
+  router->initialize();
+  admin_menu->add_default_entries();
+  Cipher::initialize();
+  server->launch(argc, argv);
+  return 0;
+}

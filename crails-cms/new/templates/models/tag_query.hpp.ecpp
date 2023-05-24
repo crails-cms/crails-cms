@@ -1,0 +1,21 @@
+#include <crails/utils/semantics.hpp>
+#include <crails/cli/conventions.hpp>
+
+std::string @resource_name;
+std::string @tag_query;
+std::string classname = Crails::naming_convention.classnames(resource_name);
+
+// END LINKING
+#pragma once
+#include <string>
+#include "<%= Crails::naming_convention.filenames(resource_name) %>.hpp"
+
+#pragma db view query("SELECT value, count(value) FROM \"<%= classname %>_tags\" WHERE (?) GROUP BY value")
+struct <%= Crails::naming_convention.classnames(tag_query) %>
+{
+  std::string get_database_name() const { return <%= classname %>().get_database_name(); }
+  #pragma db type("VARCHAR")
+  std::string value;
+  #pragma db type("INTEGER")
+  size_t count;
+};

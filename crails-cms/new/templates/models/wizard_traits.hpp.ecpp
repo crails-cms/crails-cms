@@ -1,0 +1,14 @@
+#include <crails/utils/semantics.hpp>
+#include <crails/cli/conventions.hpp>
+
+std::string @resource_name;
+std::string traits_header    = Crails::naming_convention.filenames("traits");
+std::string traits_classname = Crails::naming_convention.classnames("application_traits");
+
+// END LINKING
+#include "<%= traits_header %>.hpp"
+#include "<%= Crails::naming_convention.filenames("Settings") %>.hpp"
+
+struct <%= classname %> : public <%= traits_classname %>
+{
+};

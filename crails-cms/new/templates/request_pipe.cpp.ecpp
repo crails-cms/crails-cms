@@ -1,0 +1,29 @@
+#include <crails/request_parsers/url_parser.hpp>
+#include <crails/request_parsers/form_parser.hpp>
+#include <crails/request_parsers/multipart_parser.hpp>
+#include <crails/request_handlers/file.hpp>
+#include <crails/request_handlers/action.hpp>
+#include <crails/request_parser.hpp>
+#include <crails/cms/views/layout.hpp>
+#include <crails/cms/lib/assets.hpp>
+#include "server.hpp"
+
+using namespace Crails;
+using namespace std;
+
+static CrailsCmsAssets cms_assets;
+
+void ApplicationServer::initialize_request_pipe()
+{
+  const auto& layouts = Crails::Cms::Layouts::singleton::require();
+
+  add_request_parser(new RequestUrlParser);
+  add_request_parser(new RequestFormParser);
+  add_request_parser(new RequestMultipartParser);
+  add_request_handler(new Crails::BuiltinAssetsHandler(cms_assets));
+  layouts.load_assets(
+    bind(&ApplicationServer::add_request_handler, this, placeholders::_1)
+  );
+  add_request_handler(new FileRequestHandler);
+  add_request_handler(new ActionRequestHandler);
+}

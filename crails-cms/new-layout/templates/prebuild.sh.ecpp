@@ -1,0 +1,32 @@
+std::string @project_name;
+std::string @assets_classname;
+std::string @renderer_classname;
+// END LINKING
+#!/bin/sh
+
+SASS_COMMAND=node_modules/.bin/sass
+
+crails templates build \
+  -r html \
+  -i views \
+  -t Crails::HtmlTemplate \
+  -z crails/html_template.hpp \
+  -n <%= renderer_classname %> \
+  -p \.html$ \
+  -v
+
+mkdir -p build/javascripts
+mkdir -p build/sass
+
+webpack
+cp javascripts/editor.js build/javascripts/editor.js
+
+$SASS_COMMAND -s compressed "stylesheets/layout.scss" > build/sass/layout.css
+$SASS_COMMAND -s compressed "stylesheets/admin.scss"  > build/sass/admin.css
+
+crails-builtin-assets \
+  --inputs "build/javascripts" "build/sass" "stylesheets/fonts" \
+  --output "lib/assets" \
+  --classname "<%= assets_classname %>" \
+  --compression "gzip" \
+  --uri-root "/cms/plugins/<%= project_name %>/assets/"

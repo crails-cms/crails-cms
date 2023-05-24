@@ -1,0 +1,9 @@
+std::string @style_classname;
+// END LINKING
+#pragma once
+#include <crails/cms/views/style.hpp>
+
+class <%= style_classname %> : public Crails::Cms::Style
+{
+  SINGLETON_IMPLEMENTATION(<%= style_classname %>, Crails::Cms::Style)
+};

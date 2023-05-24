@@ -1,0 +1,30 @@
+#include <crails/utils/semantics.hpp>
+#include <crails/cli/conventions.hpp>
+
+std::string @resource_name;
+std::string classname = Crails::naming_convention.classnames(resource_name);
+std::string group_classname = Crails::naming_convention.classnames("user_group");
+// END LINKING
+#pragma once
+#include <crails/cms/models/permission_rule.hpp>
+#include "<%= Crails::naming_convention.filenames("user_group") %>.hpp"
+
+#pragma db object
+class <%= classname %> : public Crails::Cms::PermissionRule
+{
+  odb_instantiable()
+public:
+  #pragma db view object(<%= classname %>)
+  struct Count
+  {
+    #pragma db column("count(" + <%= classname %>::id + ")")
+    size_t value;
+  };
+
+  typedef void (<%= classname  %>::*PermissionSetter)(const std::vector<<%= group_classname %>>&);
+
+  void edit(Data);
+
+private:
+  void set_groups(Data, PermissionSetter);
+};

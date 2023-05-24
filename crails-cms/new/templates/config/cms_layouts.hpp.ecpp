@@ -1,0 +1,9 @@
+#pragma once
+#include <crails/cms/views/layout.hpp>
+
+class ApplicationLayouts : public Crails::Cms::Layouts
+{
+  SINGLETON_IMPLEMENTATION(ApplicationLayouts, Crails::Cms::Layouts)
+
+  ApplicationLayouts();
+};

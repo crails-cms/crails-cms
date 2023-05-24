@@ -1,0 +1,47 @@
+#include <crails/utils/semantics.hpp>
+#include <crails/cli/conventions.hpp>
+
+std::string @resource_name;
+std::string classname = Crails::naming_convention.classnames(resource_name);
+std::string group_classname = Crails::naming_convention.classnames("user_group");
+// END LINKING
+#include "<%= Crails::naming_convention.filenames("permission_rule") %>.hpp"
+#include "lib/odb/application-odb.hxx"
+#include <crails/odb/any.hpp>
+
+odb_instantiable_impl(PermissionRule)
+
+using namespace Crails;
+using namespace std;
+
+static const map<string, PermissionRule::PermissionSetter> permission_setters = {
+  {"read_groups",    &PermissionRule::set_read_groups<vector<<%= group_classname %>>>},
+  {"write_groups",   &PermissionRule::set_write_groups<vector<<%= group_classname %>>>},
+  {"destroy_groups", &PermissionRule::set_destroy_groups<vector<<%= group_classname %>>>}
+};
+
+static odb::query<<%= group_classname %>> make_group_query(Data ids)
+{
+  return odb::query<<%= group_classname %>>::id + "=" + Odb::any(ids.to_vector<Crails::Odb::id_type>());
+}
+
+void <%= classname %>::set_groups(Data ids, PermissionSetter setter)
+{
+  Crails::Odb::Connection database;
+  odb::result<<%= group_classname %>> groups;
+
+  database.rollback_on_destruction = false;
+  database.find<<%= group_classname %>>(groups, make_group_query(ids));
+  (this->*setter)(Odb::to_vector<<%= group_classname %>>(groups));
+}
+
+void <%= classname %>::edit(Data data)
+{
+  for (auto it = permission_setters.begin() ; it != permission_setters.end() ; ++it)
+  {
+    Data group_ids = data[it->first];
+
+    if (group_ids.exists())
+      set_groups(group_ids, it->second);
+  }
+}

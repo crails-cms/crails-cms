@@ -1,0 +1,26 @@
+#include <crails/cli/conventions.hpp>
+std::string @project_name;
+std::string @layout_editor_name;
+std::string @assets_classname;
+std::string @style_classname;
+std::string classname = Crails::naming_convention.classnames(project_name);
+// END LINKING
+#include "layout.hpp"
+#include "style.hpp"
+#include "lib/assets.hpp"
+
+<%= classname %>::<%= classname %>()
+{
+  name = "<%= Crails::naming_convention.filenames(project_name) %>";
+  type = Crails::Cms::ComponentLayoutType;
+  component_layout_name = "<%= layout_editor_name %>";
+  stylesheets.push_back(<%= assets_classname %>::layout_css);
+  editor_stylesheets.push_back(<%= assets_classname %>::admin_css);
+  editor_javascripts.push_back(<%= assets_classname %>::editor_js);
+}
+
+const Crails::Cms::Style& <%= classname %>::get_style() const
+{
+  static const <%= style_classname %> style;
+  return style;
+}

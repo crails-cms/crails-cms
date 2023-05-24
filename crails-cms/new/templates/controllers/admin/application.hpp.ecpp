@@ -1,0 +1,24 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("AdminApplicationController");
+std::string super = Crails::naming_convention.classnames("ApplicationController");
+
+// END LINKING
+#pragma once
+#include "../application.hpp"
+
+class <%= classname %> : public <%= super %>
+{
+public:
+  static constexpr const char* scope = "/admin";
+
+  <%= classname %>(Crails::Context& context) : <%= super %>(context)
+  {
+  }
+
+  void initialize()
+  {
+    <%= super %>::initialize();
+    vars["layout"] = std::string("layouts/admin");
+  }
+};

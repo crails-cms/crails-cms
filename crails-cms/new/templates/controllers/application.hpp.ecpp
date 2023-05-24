@@ -1,0 +1,18 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("ApplicationController");
+
+// END LINKING
+#pragma once
+#include <crails/cms/controllers/controller.hpp>
+#include "app/models/<%= Crails::naming_convention.filenames("settings") %>.hpp"
+
+class <%= classname %> : public Crails::Cms::Controller
+{
+public:
+  void initialize();
+protected:
+  <%= classname %>(Crails::Context&);
+
+  virtual std::shared_ptr<Crails::Cms::Settings> find_settings() override;
+};
