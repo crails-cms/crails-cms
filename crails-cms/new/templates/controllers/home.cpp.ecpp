@@ -27,8 +27,18 @@ void <%= classname %>::index()
 {
   if (page)
   {
-    vars["layout"] = page->get_layout().get_layout_path();
-    render("pages/show", {
+    const Crails::Cms::Layout& layout = page->get_layout();
+    string layout_path = layout.get_layout_path();
+    string page_view = "pages/show";
+
+    if (!layout_path.length()) 
+      layout_path = settings->get_layout().get_layout_path();
+    if (layout.get_type() == Crails::Cms::DocumentLayoutType)
+      page_view = "pages/document";
+    prepare_open_graph(*page);
+    vars["layout"] = layout_path;
+    vars["render_footer"] = !page->get_has_footer();
+    render(page_view, {
       {"page", reinterpret_cast<const Crails::Cms::Page*>(page.get())}
     });
   }

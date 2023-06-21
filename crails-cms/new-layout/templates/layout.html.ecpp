@@ -24,7 +24,7 @@ bool @render_footer = true;
     <%% if (open_graph) do -%>
       <%%= open_graph->render() %>
     <%% end -%>
-    <%% if (settings.get_favicon().length() do -%>
+    <%% if (settings.get_favicon().length()) do -%>
       <%%= tag("link", {{"rel","icon"},{"href", settings.get_favicon()}}) %>
     <%% end -%>
     <%%= tag("link", {{"rel","stylesheet"},{"href", <%= assets_classname %>::layout_css}}) %>
@@ -40,7 +40,7 @@ bool @render_footer = true;
 
     <main>
       <%% if (yield != nullptr) do -%>
-        <%%= *yield %>
+        <%%= yield %>
       <%% end -%>
 
       <%% if (render_footer) do -%>

@@ -9,6 +9,6 @@ std::string @project_name;
   font-family: "Font Family Name";
   src: url("/cms/plugins/<%= project_name %>/assets/font.ttf") format("truetype");
   font-weight: normal;
-  font-styke: normal;
+  font-style: normal;
 }
 */
