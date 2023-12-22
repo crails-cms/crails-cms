@@ -6,6 +6,12 @@
 
 using namespace std;
 
+const vector<string>& ProjectRenderer::get_mimetypes() const
+{
+  static const vector<string> mimetypes;
+  return mimetypes;
+}
+
 declare_renderer(project_app_main)
 declare_renderer(project_app_routes_cpp)
 declare_renderer(project_config_renderers)
