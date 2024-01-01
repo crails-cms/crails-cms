@@ -36,6 +36,14 @@ $ECPP \
  -i $PROJECT_TPL/config/cms_menus.hpp.ecpp \
  >  $PROJECT_TPL/build/cms_menus.hpp.cpp
 $ECPP \
+ -n ProjectConfigCmsPluginsHpp \
+ -i $PROJECT_TPL/config/cms_plugins.hpp.ecpp \
+ >  $PROJECT_TPL/build/cms_plugins.hpp.cpp
+$ECPP \
+ -n ProjectConfigCmsPluginsCpp \
+ -i $PROJECT_TPL/config/cms_plugins.cpp.ecpp \
+ >  $PROJECT_TPL/build/cms_plugins.cpp.cpp
+$ECPP \
  -n ProjectModelsTraits \
  -i $PROJECT_TPL/models/traits.hpp.ecpp \
  >  $PROJECT_TPL/build/traits.hpp.cpp
@@ -123,6 +131,39 @@ $ECPP \
  -n ProjectControllersAdminOpengraphHpp \
  -i $PROJECT_TPL/controllers/admin/opengraph.hpp.ecpp \
  >  $PROJECT_TPL/build/admin_opengraph_controller.hpp.cpp
+
+##
+## Plugin template
+##
+PLUGIN_TPL=crails-cms/new-plugin/templates
+$ECPP \
+ -n PluginCrailsfile \
+ -i $PLUGIN_TPL/crailsfile.ecpp \
+ >  $PLUGIN_TPL/build/crailsfile.cpp
+$ECPP \
+ -n PluginCmakelistsTxt \
+ -i $PLUGIN_TPL/CMakeLists.txt.ecpp \
+ >  $PLUGIN_TPL/build/CMakeLists.txt.cpp
+$ECPP \
+ -n PluginPrebuildSh \
+ -i $PLUGIN_TPL/prebuild.sh.ecpp \
+ >  $PLUGIN_TPL/build/prebuild.sh.cpp
+$ECPP \
+ -n PluginAppMainCpp \
+ -i $PLUGIN_TPL/main.cpp.ecpp \
+ >  $PLUGIN_TPL/build/main.cpp
+$ECPP \
+ -n PluginAppRoutesCpp \
+ -i $PLUGIN_TPL/routes.cpp.ecpp \
+ >  $PLUGIN_TPL/build/routes.cpp
+$ECPP \
+ -n PluginAppRenderersCpp \
+ -i $PLUGIN_TPL/renderers.cpp.ecpp \
+ >  $PLUGIN_TPL/build/renderers.cpp
+$ECPP \
+ -n PluginAppDatabaseCpp \
+ -i $PLUGIN_TPL/database.cpp.ecpp \
+ >  $PLUGIN_TPL/build/database.cpp
 
 ##
 ## Layout plugin template

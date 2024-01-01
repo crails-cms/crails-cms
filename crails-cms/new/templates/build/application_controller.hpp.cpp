@@ -18,7 +18,9 @@ ecpp_stream << "#pragma once\n#include <crails/cms/controllers/controller.hpp>\n
   ecpp_stream << ".hpp\"\n\nclass " << ( classname );
   ecpp_stream << " : public Crails::Cms::Controller\n{\npublic:\n  void initialize();\nprotected:\n  " << ( classname );
   ecpp_stream << "(Crails::Context&);\n\n  virtual std::shared_ptr<Crails::Cms::Settings> find_settings() override;\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

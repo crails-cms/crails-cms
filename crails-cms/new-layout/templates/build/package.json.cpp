@@ -13,7 +13,9 @@ public:
   void render()
   {
 ecpp_stream << "{\n  \"dependencies\": {\n    \"webpack\": \"^5.75.0\",\n    \"webpack-cli\": \"^4.10.0\",\n    \"sass\": \"^1.57.1\"\n  }\n}\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

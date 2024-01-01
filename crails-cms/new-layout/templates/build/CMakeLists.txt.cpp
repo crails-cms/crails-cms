@@ -15,11 +15,13 @@ public:
   void render()
   {
 ecpp_stream << "cmake_minimum_required(VERSION 3.0)\n\nproject(" << ( library_name );
-  ecpp_stream << "_plugin)\n\nfind_package(PkgConfig)\npkg_check_modules(CRAILS_CMS REQUIRED libcrails-cms>=2.0.0)\n\ninclude_directories(${CRAILS_CMS_INCLUDE_DIRS} .)\n\nfile(GLOB plugin_files\n  src/*.cpp\n  lib/*.cpp\n  lib/renderers/*.cpp\n  lib/renderers/html/*.cpp)\n\nadd_library(" << ( library_name );
+  ecpp_stream << "_plugin)\n\nfind_package(PkgConfig)\npkg_check_modules(CRAILS_CMS REQUIRED libcrails-cms>=2.0.0)\n\ninclude_directories(${CRAILS_CMS_INCLUDE_DIRS} .)\n\nexecute_process(COMMAND ./prebuild.sh WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})\n\nfile(GLOB plugin_files\n  src/*.cpp\n  lib/*.cpp\n  lib/renderers/*.cpp\n  lib/renderers/html/*.cpp)\n\nadd_library(" << ( library_name );
   ecpp_stream << " SHARED ${plugin_files})\nset_property(TARGET " << ( library_name );
   ecpp_stream << " PROPERTY ENABLE_EXPORTS ON)\ntarget_link_libraries(" << ( library_name );
   ecpp_stream << " ${CRAILS_CMS_LIBRARIES})\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

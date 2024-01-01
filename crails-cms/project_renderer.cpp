@@ -19,6 +19,8 @@ declare_renderer(project_config_request_pipe)
 declare_renderer(project_config_cms_layouts_hpp)
 declare_renderer(project_config_cms_layouts_cpp)
 declare_renderer(project_config_cms_menus_hpp)
+declare_renderer(project_config_cms_plugins_hpp)
+declare_renderer(project_config_cms_plugins_cpp)
 declare_renderer(project_models_traits)
 declare_renderer(project_models_model_hpp)
 declare_renderer(project_models_model_cpp)
@@ -58,6 +60,14 @@ declare_renderer(layout_plugin_fonts_scss)
 declare_renderer(layout_plugin_theme_scss)
 declare_renderer(layout_plugin_editor_js)
 
+declare_renderer(plugin_crailsfile)
+declare_renderer(plugin_cmakelists_txt)
+declare_renderer(plugin_prebuild_sh)
+declare_renderer(plugin_app_main_cpp)
+declare_renderer(plugin_app_routes_cpp)
+declare_renderer(plugin_app_renderers_cpp)
+declare_renderer(plugin_app_database_cpp)
+
 ProjectRenderer::ProjectRenderer()
 {
   add_renderer("app/main.cpp", project_app_main);
@@ -67,6 +77,8 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("config/cms/layouts.hpp", project_config_cms_layouts_hpp);
   add_renderer("config/cms/layouts.cpp", project_config_cms_layouts_cpp);
   add_renderer("config/cms/menus.hpp", project_config_cms_menus_hpp);
+  add_renderer("config/cms/plugins.hpp", project_config_cms_plugins_hpp);
+  add_renderer("config/cms/plugins.cpp", project_config_cms_plugins_cpp);
   add_renderer("app/models/traits.hpp", project_models_traits);
   add_renderer("app/models/model.hpp", project_models_model_hpp);
   add_renderer("app/models/model.cpp", project_models_model_cpp);
@@ -105,4 +117,12 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("layouts/stylesheets/layout.scss", layout_plugin_layout_scss);
   add_renderer("layouts/stylesheets/_fonts.scss", layout_plugin_fonts_scss);
   add_renderer("layouts/stylesheets/_theme.scss", layout_plugin_theme_scss);
+
+  add_renderer("plugins/.crails", plugin_crailsfile);
+  add_renderer("plugins/CMakeLists.txt", plugin_cmakelists_txt);
+  add_renderer("plugins/prebuild.sh", plugin_prebuild_sh);
+  add_renderer("plugins/app/main.cpp", plugin_app_main_cpp);
+  add_renderer("plugins/app/routes.cpp", plugin_app_routes_cpp);
+  add_renderer("plugins/app/renderers.cpp", plugin_app_renderers_cpp);
+  add_renderer("plugins/app/database.cpp", plugin_app_database_cpp);
 }

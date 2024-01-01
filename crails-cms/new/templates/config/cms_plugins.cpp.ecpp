@@ -1,0 +1,14 @@
+#include <crails/odb/connection.hpp>
+#include "plugins.hpp"
+#include "app/models/settings.hpp"
+#include "lib/odb/application-odb.hxx"
+
+ApplicationPlugins::ApplicationPlugins()
+{
+  Crails::Odb::Connection database;
+  std::shared_ptr<Settings> settings;
+
+  database.find_one(settings);
+  if (settings)
+    initialize(settings->get_plugins());
+}

@@ -13,7 +13,9 @@ public:
   void render()
   {
 ecpp_stream << "const path = require(\"path\");\n\nmodule.exports = {\n  entry: [\"./javascripts/index.js\"],\n  output: {\n    path: path.resolve(__dirname, \"build/javascripts\"),\n    filename: \"bundle.js\"\n  }\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

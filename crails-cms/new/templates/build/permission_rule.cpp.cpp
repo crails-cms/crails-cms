@@ -29,7 +29,9 @@ ecpp_stream << "#include \"" << ( Crails::naming_convention.filenames("permissio
   ecpp_stream << ">(groups, make_group_query(ids));\n  (this->*setter)(Odb::to_vector<" << ( group_classname );
   ecpp_stream << ">(groups));\n}\n\nvoid " << ( classname );
   ecpp_stream << "::edit(Data data)\n{\n  for (auto it = permission_setters.begin() ; it != permission_setters.end() ; ++it)\n  {\n    Data group_ids = data[it->first];\n\n    if (group_ids.exists())\n      set_groups(group_ids, it->second);\n  }\n}\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

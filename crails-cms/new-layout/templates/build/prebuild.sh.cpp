@@ -19,7 +19,9 @@ ecpp_stream << "#!/bin/sh\n\nSASS_COMMAND=node_modules/.bin/sass\n\ncrails templ
   ecpp_stream << " \\\n  -p \\.html$ \\\n  -v\n\nmkdir -p build/javascripts\nmkdir -p build/sass\n\nwebpack\ncp javascripts/editor.js build/javascripts/editor.js\n\n$SASS_COMMAND -s compressed \"stylesheets/layout.scss\" > build/sass/layout.css\n$SASS_COMMAND -s compressed \"stylesheets/admin.scss\"  > build/sass/admin.css\n\ncrails-builtin-assets \\\n  --inputs \"javascripts\" \"build/sass\" \"stylesheets/fonts\" \\\n  --output \"lib/assets\" \\\n  --classname \"" << ( assets_classname );
   ecpp_stream << "\" \\\n  --compression \"gzip\" \\\n  --uri-root \"/cms/plugins/" << ( project_name );
   ecpp_stream << "/assets/\"\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

@@ -27,7 +27,9 @@ ecpp_stream << "#include \"signin.hpp\"\n\nusing namespace std;\n" << ( classnam
   ecpp_stream << "> user;\n  Crails::Password password(params[\"password\"].as<string>());;\n\n  database.find_one(\n    user,\n    odb::query<" << ( userclass );
   ecpp_stream << ">::email == params[\"email\"].as<string>() &&\n    odb::query<" << ( userclass );
   ecpp_stream << ">::password == password.c_str()\n  );\n  return user;\n}\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

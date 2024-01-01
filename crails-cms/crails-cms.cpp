@@ -1,6 +1,7 @@
 #include <iostream>
 #include <crails/cli/command_index.hpp>
 #include "new/command.hpp"
+#include "new-plugin/command.hpp"
 #include "new-layout/command.hpp"
 
 using namespace Crails;
@@ -12,6 +13,7 @@ public:
   Index()
   {
     add_command("new", []() { return make_shared<New>(); });
+    add_command("new-plugin", []() { return make_shared<NewPlugin>(); });
     add_command("new-layout", []() { return make_shared<NewLayout>(); });
   }
 };

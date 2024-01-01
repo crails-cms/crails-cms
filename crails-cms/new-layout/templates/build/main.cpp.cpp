@@ -21,7 +21,9 @@ ecpp_stream << "#include \"layout.hpp\"\n#include \"lib/assets.hpp\"\n#include \
   ecpp_stream << " assets;\n    return &assets;\n  }\n\n  Crails::Renderer* get_html_renderer()\n  {\n    static " << ( renderer_classname );
   ecpp_stream << " renderer;\n    return &renderer;\n  }\n\n  Crails::Cms::Layout* create_layout()\n  {\n    return new " << ( Crails::naming_convention.classnames(project_name) );
   ecpp_stream << "();\n  }\n}\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

@@ -10,6 +10,8 @@ pkg_check_modules(CRAILS_CMS REQUIRED libcrails-cms>=2.0.0)
 
 include_directories(${CRAILS_CMS_INCLUDE_DIRS} .)
 
+execute_process(COMMAND ./prebuild.sh WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
 file(GLOB plugin_files
   src/*.cpp
   lib/*.cpp

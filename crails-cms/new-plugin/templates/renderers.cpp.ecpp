@@ -1,0 +1,34 @@
+#include <crails/cli/conventions.hpp>
+
+std::string @project_name;
+std::string @html_renderer_classname;
+std::string @json_renderer_classname;
+std::string html_renderer_include = Crails::naming_convention.filenames(html_renderer_classname);
+std::string json_renderer_include = Crails::naming_convention.filenames(json_renderer_classname);
+// END LINKING
+#include <crails/renderer.hpp>
+#include "lib/renderers/<%= html_renderer_include %>.hpp"
+#include "lib/renderers/<%= json_renderer_include %>.hpp"
+#include <iostream>
+
+static void initialize_renderer(const Crails::Renderers& renderers, const Crails::Renderer& source)
+{
+  for (auto it = renderers.begin() ; it != renderers.end() ; ++it)
+  {
+    const Crails::Renderer* renderer = it->get();
+
+    if (*renderer->get_mimetypes().begin() == *source.get_mimetypes().begin())
+      const_cast<Crails::Renderer*>(renderer)->merge(source);
+  }
+}
+
+void initialize_plugin_renderers()
+{
+  auto& renderers = Crails::Renderers::singleton::require();
+  <%= html_renderer_classname %> plugin_html;
+  <%= json_renderer_classname %> plugin_json;
+
+  initialize_renderer(renderers, plugin_html);
+  initialize_renderer(renderers, plugin_json);
+}
+

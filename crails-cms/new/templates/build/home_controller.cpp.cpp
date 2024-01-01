@@ -24,7 +24,9 @@ ecpp_stream << "#include <crails/cms/views/layout.hpp>\n#include \"home.hpp\"\n#
   ecpp_stream << "::index()\n{\n  if (page)\n  {\n    const Crails::Cms::Layout& layout = page->get_layout();\n    string layout_path = layout.get_layout_path();\n    string page_view = \"pages/show\";\n\n    if (!layout_path.length()) \n      layout_path = settings->get_layout().get_layout_path();\n    if (layout.get_type() == Crails::Cms::DocumentLayoutType)\n      page_view = \"pages/document\";\n    prepare_open_graph(*page);\n    vars[\"layout\"] = layout_path;\n    vars[\"render_footer\"] = !page->get_has_footer();\n    render(page_view, {\n      {\"page\", reinterpret_cast<const Crails::Cms::Page*>(page.get())}\n    });\n  }\n  else\n    render(TEXT, \"No homepage set\");\n}\n\nshared_ptr<Crails::Cms::Settings> " << ( classname );
   ecpp_stream << "::find_settings()\n{\n  shared_ptr<" << ( Crails::naming_convention.classnames("SettingsHomepageQuery") );
   ecpp_stream << "> query;\n\n  database.find_one(query);\n  if (query)\n  {\n    settings = query->settings;\n    page = query->page;\n  }\n  return settings;\n}\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

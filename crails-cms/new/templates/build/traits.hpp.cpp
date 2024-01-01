@@ -25,7 +25,9 @@ ecpp_stream << "#pragma once\n#include \"" << ( user_filename );
   ecpp_stream << "\n{\n  typedef " << ( user_classname );
   ecpp_stream << " UserModel;\n  typedef " << ( group_classname );
   ecpp_stream << " UserGroupModel;\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

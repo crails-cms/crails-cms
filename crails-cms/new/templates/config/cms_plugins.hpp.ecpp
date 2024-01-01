@@ -1,0 +1,9 @@
+#pragma once
+#include <crails/cms/plugins.hpp>
+
+class ApplicationPlugins : public Crails::Cms::Plugins
+{
+  SINGLETON_IMPLEMENTATION(ApplicationPlugins, Crails::Cms::Plugins)
+public:
+  ApplicationPlugins();
+};

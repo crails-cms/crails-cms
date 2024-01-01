@@ -24,7 +24,9 @@ ecpp_stream << "#include <crails/signin/session_controller.hpp>\n#include <crail
   ecpp_stream << " Super;\npublic:\n  " << ( classname );
   ecpp_stream << "(Crails::Context&);\n\n  void new_();\n  void on_session_created() override;\n  void on_session_destroyed() override;\n  void on_session_not_created() override;\n\nprivate:\n  std::shared_ptr<" << ( Crails::naming_convention.classnames("User") );
   ecpp_stream << "> find_user() override;\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

@@ -25,7 +25,9 @@ ecpp_stream << "#pragma once\n#include <crails/cms/controllers/admin/settings.hp
   ecpp_stream << "\n{\n  typedef " << ( super );
   ecpp_stream << " Super;\npublic:\n  " << ( class_name );
   ecpp_stream << "(Crails::Context& context) : Super(context)\n  {\n    vars[\"local_route\"] = \"/admin/settings\";\n  }\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

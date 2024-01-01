@@ -28,7 +28,9 @@ ecpp_stream << "#include \"layout.hpp\"\n#include \"style.hpp\"\n#include \"lib/
   ecpp_stream << "::editor_js);\n}\n\nconst Crails::Cms::Style& " << ( classname );
   ecpp_stream << "::get_style() const\n{\n  static const " << ( style_classname );
   ecpp_stream << " style;\n  return style;\n}\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

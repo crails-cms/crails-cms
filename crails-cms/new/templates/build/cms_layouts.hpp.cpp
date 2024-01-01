@@ -13,7 +13,9 @@ public:
   void render()
   {
 ecpp_stream << "#pragma once\n#include <crails/cms/views/layout.hpp>\n\nclass ApplicationLayouts : public Crails::Cms::Layouts\n{\n  SINGLETON_IMPLEMENTATION(ApplicationLayouts, Crails::Cms::Layouts)\n\n  ApplicationLayouts();\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

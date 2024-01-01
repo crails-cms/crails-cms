@@ -30,7 +30,9 @@ ecpp_stream << "#pragma once\n#include \"" << ( Crails::naming_convention.filena
   ecpp_stream << "::homepage_id == " << ( page_classname );
   ecpp_stream << "::id)\n  struct Count\n  {\n    #pragma db column(\"count(\" + " << ( settings_classname );
   ecpp_stream << "::id + \")\")\n    size_t value;\n  };\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

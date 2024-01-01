@@ -20,7 +20,9 @@ ecpp_stream << "#pragma once\n#include \"application.hpp\"\n#include \"../models
   ecpp_stream << "\n{\npublic:\n  " << ( classname );
   ecpp_stream << "(Crails::Context&);\n\n  void initialize();\n  void index();\n\nprivate:\n  std::shared_ptr<Crails::Cms::Settings> find_settings() override;\n\n  std::shared_ptr<" << ( Crails::naming_convention.classnames("Page") );
   ecpp_stream << "> page;\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

@@ -1,0 +1,8 @@
+#include <crails/router.hpp>
+
+void initialize_plugin_routes()
+{
+  auto& router = Crails::Router::singleton::require();
+
+  // insert plugin routes here
+}

@@ -22,7 +22,9 @@ ecpp_stream << "#pragma once\n#include <string>\n#include \"" << ( Crails::namin
   ecpp_stream << "_tags\\\" WHERE (?) GROUP BY value\")\nstruct " << ( Crails::naming_convention.classnames(tag_query) );
   ecpp_stream << "\n{\n  std::string get_database_name() const { return " << ( classname );
   ecpp_stream << "().get_database_name(); }\n  #pragma db type(\"VARCHAR\")\n  std::string value;\n  #pragma db type(\"INTEGER\")\n  size_t count;\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

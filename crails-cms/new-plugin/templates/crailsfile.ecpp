@@ -1,0 +1,3 @@
+std::string @project_name;
+// END LINKING
+name=<%= project_name %>-cms-plugin

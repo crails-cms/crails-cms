@@ -9,8 +9,8 @@ using namespace std;
 void New::options_description(boost::program_options::options_description& desc) const
 {
   desc.add_options()
-    ("name,n", boost::program_options::value<string>(), "project name")
-    ("target,o",        boost::program_options::value<string>(), "folder in which the project will be generated (equal to `name` by default)")
+    ("name,n",     boost::program_options::value<string>(), "project name")
+    ("target,o",   boost::program_options::value<string>(), "folder in which the project will be generated (equal to `name` by default)")
     ("database,d", boost::program_options::value<string>(), "options: sqlite, pgsql, mysql, oracle");
 }
 
@@ -33,6 +33,8 @@ int New::run()
       generate_file("config/cms/layouts.hpp");
       generate_file("config/cms/layouts.cpp");
       generate_file("config/cms/menus.hpp");
+      generate_file("config/cms/plugins.hpp");
+      generate_file("config/cms/plugins.cpp");
     }
   }
   return -1;

@@ -15,7 +15,9 @@ public:
   {
 ecpp_stream << "/* \n * Example:\n * N.B: font.ttf should be stored in the stylesheets/fonts folder\n\n@font-face {\n  font-family: \"Font Family Name\";\n  src: url(\"/cms/plugins/" << ( project_name );
   ecpp_stream << "/assets/font.ttf\") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n*/\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

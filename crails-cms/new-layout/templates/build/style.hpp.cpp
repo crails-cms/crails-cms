@@ -16,7 +16,9 @@ public:
 ecpp_stream << "#pragma once\n#include <crails/cms/views/style.hpp>\n\nclass " << ( style_classname );
   ecpp_stream << " : public Crails::Cms::Style\n{\n  SINGLETON_IMPLEMENTATION(" << ( style_classname );
   ecpp_stream << ", Crails::Cms::Style)\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

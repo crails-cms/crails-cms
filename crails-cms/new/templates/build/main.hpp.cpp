@@ -22,7 +22,9 @@ ecpp_stream << "#pragma once\n#include <crails/cms/models/" << ( Crails::undersc
   ecpp_stream << "\n{\n  odb_instantiable()\npublic:\n  #pragma db view object(" << ( classname );
   ecpp_stream << ")\n  struct Count\n  {\n    #pragma db column(\"count(\" + " << ( classname );
   ecpp_stream << "::id + \")\")\n    size_t value;\n  };\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

@@ -27,7 +27,9 @@ ecpp_stream << "#pragma once\n#include <crails/odb/helpers.hpp>\n#include <crail
   ecpp_stream << "> get_permissions() { return permissions; }\n  std::vector<Crails::Odb::id_type> get_group_ids() const override { return collect_ids_from(groups); }\n\nprivate:\n  std::vector<std::shared_ptr<" << ( group_classname );
   ecpp_stream << ">> groups;\n  #pragma db transient\n  Crails::Cms::UserPermissions<" << ( group_classname );
   ecpp_stream << "> permissions;\n};\n";
-    this->target.set_body(ecpp_stream.str());
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;

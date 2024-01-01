@@ -16,10 +16,12 @@ public:
   {
 ecpp_stream << "#include \"renderers.hpp\"\n#include \"lib/renderers/" << ( Crails::underscore(project_name) );
   ecpp_stream << "_html_renderer.hpp\"\n#include \"lib/renderers/" << ( Crails::underscore(project_name) );
-  ecpp_stream << "_json_renderer.hpp\"\n#include <crails/cms/lib/renderers/crails_cms_html_renderer.hpp>\n#include <crails/cms/lib/renderers/crails_cms_json_renderer.hpp>\n#include <crails/cms/views/layout.hpp>\n\nusing namespace Crails;\n\nApplicationRenderers::ApplicationRenderers()\n{\n  const auto& layouts = Crails::Cms::Layouts::singleton::require();\n  CrailsCmsHtmlRenderer html_renderer;\n  CrailsCmsJsonRenderer json_renderer;\n\n  default_format = \"text/html\";\n  layouts.load_renderers(html_renderer);\n  html_renderer.merge(" << ( Crails::camelize(project_name) );
-  ecpp_stream << "HtmlRenderer());\n  json_renderer.merge(" << ( Crails::camelize(project_name) );
-  ecpp_stream << "JsonRenderer());\n  renderers.push_back(std::make_unique<Crails::HtmlRenderer>(html_renderer));\n  renderers.push_back(std::make_unique<Crails::JsonRenderer>(json_renderer));\n}\n";
-    this->target.set_body(ecpp_stream.str());
+  ecpp_stream << "_json_renderer.hpp\"\n#include <crails/cms/lib/renderers/crails_cms_html_renderer.hpp>\n#include <crails/cms/lib/renderers/crails_cms_json_renderer.hpp>\n#include <crails/cms/views/layout.hpp>\n\nusing namespace Crails;\n\nApplicationRenderers::ApplicationRenderers()\n{\n  const auto& layouts = Crails::Cms::Layouts::singleton::require();\n  auto html_renderer std::make_unique<CrailsCmsHtmlRenderer>();\n  auto json_renderer std::make_unique<CrailsCmsJsonRenderer>();\n\n  default_format = \"text/html\";\n  layouts.load_renderers(*html_renderer);\n  html_renderer->merge(" << ( Crails::camelize(project_name) );
+  ecpp_stream << "HtmlRenderer());\n  json_renderer->merge(" << ( Crails::camelize(project_name) );
+  ecpp_stream << "JsonRenderer());\n  renderers.push_back(std::move(html_renderer));\n  renderers.push_back(std::move(json_renderer));\n}\n";
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
   }
 private:
   std::stringstream ecpp_stream;
