@@ -12,6 +12,7 @@ const char* @yield;
 const Crails::Cms::Settings& @settings;
 const Crails::Cms::OpenGraph* @open_graph = nullptr;
 std::string @page_title = settings.get_title();
+std::string @rss = "";
 bool @render_footer = true;
 <%= style_classname %> style;
 
@@ -23,6 +24,9 @@ bool @render_footer = true;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <%% if (open_graph) do -%>
       <%%= open_graph->render() %>
+    <%% end -%>
+    <%% if (rss.length() > 0) do -%>
+      <%= tag("link", {{"rel","alternate"},{"href", rss},{"type","application/rss+xml"},{"title",settings.get_title()}}) %>
     <%% end -%>
     <%% if (settings.get_favicon().length()) do -%>
       <%%= tag("link", {{"rel","icon"},{"href", settings.get_favicon()}}) %>
