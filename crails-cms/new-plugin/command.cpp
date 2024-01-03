@@ -28,9 +28,10 @@ int NewPlugin::run()
       generate_file("app/routes.cpp");
       generate_file("app/renderers.cpp");
       generate_file("app/database.cpp");
-      filesystem::create_directories("app/controllers");
+      filesystem::create_directories("app/controllers/admin");
       filesystem::create_directories("app/models");
       filesystem::create_directories("app/views");
+      filesystem::permissions("prebuild.sh", filesystem::perms::owner_all | filesystem::perms::group_all);
       return 0;
     }
     return -2;
