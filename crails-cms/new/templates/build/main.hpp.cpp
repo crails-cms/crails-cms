@@ -11,12 +11,13 @@ public:
   render_ProjectModelsModelHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
     resource_name(Crails::cast<std::string>(vars, "resource_name")), 
+    include_path(Crails::cast<std::string>(vars, "include_path",  Crails::underscore(resource_name))), 
     classname( Crails::naming_convention.classnames(resource_name))
   {}
 
   void render()
   {
-ecpp_stream << "#pragma once\n#include <crails/cms/models/" << ( Crails::underscore(resource_name) );
+ecpp_stream << "#pragma once\n#include <crails/cms/models/" << ( include_path );
   ecpp_stream << ".hpp>\n\n#pragma db object\nclass " << ( classname );
   ecpp_stream << " : public Crails::Cms::" << ( Crails::camelize(resource_name) );
   ecpp_stream << "\n{\n  odb_instantiable()\npublic:\n  #pragma db view object(" << ( classname );
@@ -29,6 +30,7 @@ ecpp_stream << "#pragma once\n#include <crails/cms/models/" << ( Crails::undersc
 private:
   std::stringstream ecpp_stream;
   std::string resource_name;
+  std::string include_path;
   std::string classname;
 };
 

@@ -2,10 +2,11 @@
 #include <crails/cli/conventions.hpp>
 
 std::string @resource_name;
+std::string @include_path = Crails::underscore(resource_name);
 std::string classname = Crails::naming_convention.classnames(resource_name);
 // END LINKING
 #pragma once
-#include <crails/cms/models/<%= Crails::underscore(resource_name) %>.hpp>
+#include <crails/cms/models/<%= include_path %>.hpp>
 
 #pragma db object
 class <%= classname %> : public Crails::Cms::<%= Crails::camelize(resource_name) %>

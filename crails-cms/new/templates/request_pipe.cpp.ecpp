@@ -6,6 +6,7 @@
 #include <crails/request_parser.hpp>
 #include <crails/cms/views/layout.hpp>
 #include <crails/cms/lib/assets.hpp>
+#include <crails/cms/plugins.hpp>
 #include "server.hpp"
 
 using namespace Crails;
@@ -15,12 +16,15 @@ static CrailsCmsAssets cms_assets;
 
 void ApplicationServer::initialize_request_pipe()
 {
+  const auto* plugins = Crails::Cms::Plugins::singleton::get();
   const auto& layouts = Crails::Cms::Layouts::singleton::require();
 
   add_request_parser(new RequestUrlParser);
   add_request_parser(new RequestFormParser);
   add_request_parser(new RequestMultipartParser);
   add_request_handler(new Crails::BuiltinAssetsHandler(cms_assets));
+  if (plugins)
+    add_request_handler(new Crails::BuiltinAssetsHandler(plugins->get_assets()));
   layouts.load_assets(
     bind(&ApplicationServer::add_request_handler, this, placeholders::_1)
   );
