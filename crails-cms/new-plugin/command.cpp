@@ -24,6 +24,7 @@ int NewPlugin::run()
       generate_file(".crails");
       generate_file("CMakeLists.txt");
       generate_file("prebuild.sh");
+      generate_file("package.json");
       generate_file("app/main.cpp");
       generate_file("app/routes.cpp");
       generate_file("app/renderers.cpp");

@@ -155,7 +155,8 @@ void New::generate_models()
     "permission_rule",
     "menu",
     "page",
-    "attachment"
+    "attachment",
+    "blog_post"
   };
 
   generate_file("app/models/homepage.hpp");
@@ -185,6 +186,8 @@ void New::generate_model(const std::string& resource_name)
     renderer.vars["tag_query"] = std::string();
   if (filename == "user")
     header_template = "app/models/user.hpp";
+  if (resource_name == "blog_post")
+    renderer.vars["include_path"] = "blog/post";
   renderer.generate_file(header_template, "app/models/" + filename + ".hpp");
   renderer.generate_file(source_template, "app/models/" + filename + ".cpp");
   renderer.generate_file(traits_template, "app/models/" + filename + "_traits.hpp");

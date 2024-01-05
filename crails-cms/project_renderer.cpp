@@ -63,6 +63,7 @@ declare_renderer(layout_plugin_editor_js)
 declare_renderer(plugin_crailsfile)
 declare_renderer(plugin_cmakelists_txt)
 declare_renderer(plugin_prebuild_sh)
+declare_renderer(plugin_package_json)
 declare_renderer(plugin_app_main_cpp)
 declare_renderer(plugin_app_routes_cpp)
 declare_renderer(plugin_app_renderers_cpp)
@@ -121,6 +122,7 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("plugins/.crails", plugin_crailsfile);
   add_renderer("plugins/CMakeLists.txt", plugin_cmakelists_txt);
   add_renderer("plugins/prebuild.sh", plugin_prebuild_sh);
+  add_renderer("plugins/package.json", plugin_package_json);
   add_renderer("plugins/app/main.cpp", plugin_app_main_cpp);
   add_renderer("plugins/app/routes.cpp", plugin_app_routes_cpp);
   add_renderer("plugins/app/renderers.cpp", plugin_app_renderers_cpp);

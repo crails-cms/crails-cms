@@ -26,6 +26,23 @@ crails templates build \
   -p \.json$ \
   -v
 
+crails templates build \
+  -r rss \
+  -i app/views \
+  -t Crails::RssTemplate \
+  -z crails/rss_template.hpp \
+  -n PodcastPluginRssRenderer \
+  -p \.rss$ \
+  -v
+
+##
+## JavaScript
+##
+npm install
+node_modules/.bin/webpack
+xxd -i -n <%= project_name %>_plugin_application_js lib/application.js lib/application.js.cpp
+xxd -i -n <%= project_name %>_plugin_admin_js lib/admin.js lib/admin.js.cpp
+
 ##
 ## Database
 ##

@@ -1,7 +1,16 @@
+std::string @project_name;
+// END LINKING
+#include <string>
+
 void initialize_plugin_routes();
 void initialize_plugin_renderers();
 void install_plugin_database();
 void uninstall_plugin_database();
+
+extern unsigned char <%= project_name %>_plugin_application_js[];
+extern unsigned int  <%= project_name %>_plugin_application_js_len;
+extern unsigned char <%= project_name %>_plugin_admin_js[];
+extern unsigned int  <%= project_name %>_plugin_admin_js_len;
 
 extern "C"
 {
@@ -19,5 +28,21 @@ extern "C"
   void uninstall()
   {
     uninstall_plugin_database();
+  }
+
+  std::string javascript()
+  {
+    return std::string(
+      reinterpret_cast<const char*>(<%= project_name %>_plugin_application_js),
+      <%= project_name %>_plugin_application_js_len
+    );
+  }
+
+  std::string admin_javascript()
+  {
+    return std::string(
+      reinterpret_cast<const char*>(<%= project_name %>_plugin_admin_js),
+      <%= project_name %>_plugin_admin_js_len
+    );
   }
 }

@@ -149,6 +149,10 @@ $ECPP \
  -i $PLUGIN_TPL/prebuild.sh.ecpp \
  >  $PLUGIN_TPL/build/prebuild.sh.cpp
 $ECPP \
+ -n PluginPackageJson \
+ -i $PLUGIN_TPL/package.json.ecpp \
+ >  $PLUGIN_TPL/build/package.json.cpp
+$ECPP \
  -n PluginAppMainCpp \
  -i $PLUGIN_TPL/main.cpp.ecpp \
  >  $PLUGIN_TPL/build/main.cpp
