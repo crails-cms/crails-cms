@@ -35,6 +35,7 @@ int NewLayout::run()
       generate_file("stylesheets/layout.scss");
       generate_file("stylesheets/_fonts.scss");
       generate_file("stylesheets/_theme.scss");
+      filesystem::permissions("prebuild.sh", filesystem::perms::owner_all | filesystem::perms::group_all);
       return 0;
     }
     return -2;
