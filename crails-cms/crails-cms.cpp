@@ -3,6 +3,7 @@
 #include "new/command.hpp"
 #include "new-plugin/command.hpp"
 #include "new-layout/command.hpp"
+#include "add-plugin/command.hpp"
 
 using namespace Crails;
 using namespace std;
@@ -15,6 +16,8 @@ public:
     add_command("new", []() { return make_shared<New>(); });
     add_command("new-plugin", []() { return make_shared<NewPlugin>(); });
     add_command("new-layout", []() { return make_shared<NewLayout>(); });
+    add_command("add-plugin", []() { return make_shared<AddPlugin>(); });
+    //add_command("add-layout", []() { return make_shared<AddLayout>(); });
   }
 };
 
