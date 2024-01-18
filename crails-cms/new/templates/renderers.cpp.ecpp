@@ -18,8 +18,8 @@ using namespace Crails;
 ApplicationRenderers::ApplicationRenderers()
 {
   const auto& layouts = Crails::Cms::Layouts::singleton::require();
-  auto html_renderer std::make_unique<CrailsCmsHtmlRenderer>();
-  auto json_renderer std::make_unique<CrailsCmsJsonRenderer>();
+  auto html_renderer = std::make_unique<CrailsCmsHtmlRenderer>();
+  auto json_renderer = std::make_unique<CrailsCmsJsonRenderer>();
   auto rss_renderer = std::make_unique<CrailsCmsRssRenderer>();
 
   default_format = "text/html";

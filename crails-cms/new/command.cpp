@@ -16,6 +16,7 @@ void New::options_description(boost::program_options::options_description& desc)
 
 int New::run()
 {
+  renderer.should_overwrite = true;
   if (options.count("name"))
   {
     load_options();
@@ -86,6 +87,8 @@ bool New::add_crails_plugins()
   results += Crails::run_command(crails_bin + " templates formats -a html");
   cout << "+ " << crails_bin << " templates formats -a json" << endl;
   results += Crails::run_command(crails_bin + " templates formats -a json");
+  cout << "+ " << crails_bin << " templates formats -a rss" << endl;
+  results += Crails::run_command(crails_bin + " templates formats -a rss");
   cout << "+ " << crails_bin << " plugins i18n install" << endl;
   results += Crails::run_command(crails_bin + " plugins i18n install");
   cout << "+ " << crails_bin << " plugins signin install" << endl;
@@ -191,6 +194,8 @@ void New::generate_model(const std::string& resource_name)
   renderer.generate_file(header_template, "app/models/" + filename + ".hpp");
   renderer.generate_file(source_template, "app/models/" + filename + ".cpp");
   renderer.generate_file(traits_template, "app/models/" + filename + "_traits.hpp");
+  if (renderer.vars.count("include_path") > 0)
+    renderer.vars.erase(renderer.vars.find("include_path"));
 }
 
 void New::generate_user_group_model()
