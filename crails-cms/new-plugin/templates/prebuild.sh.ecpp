@@ -1,6 +1,9 @@
 std::string @project_name;
 std::string @html_renderer_classname;
 std::string @json_renderer_classname;
+bool @with_javascript = true;
+bool @with_json = true;
+bool @with_rss = true;
 // END LINKING
 
 #!/bin/sh
@@ -17,6 +20,7 @@ crails templates build \
   -p \.html$ \
   -v
 
+<% if (with_json) do -%>
 crails templates build \
   -r json \
   -i app/views \
@@ -25,7 +29,9 @@ crails templates build \
   -n <%= json_renderer_classname %> \
   -p \.json$ \
   -v
+<% end -%>
 
+<% if (with_rss) do -%>
 crails templates build \
   -r rss \
   -i app/views \
@@ -34,7 +40,9 @@ crails templates build \
   -n PodcastPluginRssRenderer \
   -p \.rss$ \
   -v
+<% end -%>
 
+<% if (with_javascript) do -%>
 ##
 ## JavaScript
 ##
@@ -42,6 +50,7 @@ npm install
 node_modules/.bin/webpack
 xxd -i -n <%= project_name %>_plugin_application_js lib/application.js lib/application.js.cpp
 xxd -i -n <%= project_name %>_plugin_admin_js lib/admin.js lib/admin.js.cpp
+<% end -%>
 
 ##
 ## Database
