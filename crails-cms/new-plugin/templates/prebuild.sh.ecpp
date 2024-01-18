@@ -1,6 +1,7 @@
 std::string @project_name;
 std::string @html_renderer_classname;
 std::string @json_renderer_classname;
+std::string @rss_renderer_classname;
 bool @with_javascript = true;
 bool @with_json = true;
 bool @with_rss = true;
@@ -37,7 +38,7 @@ crails templates build \
   -i app/views \
   -t Crails::RssTemplate \
   -z crails/rss_template.hpp \
-  -n PodcastPluginRssRenderer \
+  -n <%= rss_renderer_classname %> \
   -p \.rss$ \
   -v
 <% end -%>

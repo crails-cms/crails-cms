@@ -11,6 +11,7 @@ public:
     project_name(Crails::cast<std::string>(vars, "project_name")), 
     html_renderer_classname(Crails::cast<std::string>(vars, "html_renderer_classname")), 
     json_renderer_classname(Crails::cast<std::string>(vars, "json_renderer_classname")), 
+    rss_renderer_classname(Crails::cast<std::string>(vars, "rss_renderer_classname")), 
     with_javascript(Crails::cast<bool>(vars, "with_javascript",  true)), 
     with_json(Crails::cast<bool>(vars, "with_json",  true)), 
     with_rss(Crails::cast<bool>(vars, "with_rss",  true))
@@ -26,7 +27,8 @@ ecpp_stream << "#!/bin/sh\n\n##\n## Renderers\n##\ncrails templates build \\\n  
  };
   ecpp_stream << "";
  if (with_rss){
-  ecpp_stream << "\ncrails templates build \\\n  -r rss \\\n  -i app/views \\\n  -t Crails::RssTemplate \\\n  -z crails/rss_template.hpp \\\n  -n PodcastPluginRssRenderer \\\n  -p \\.rss$ \\\n  -v";
+  ecpp_stream << "\ncrails templates build \\\n  -r rss \\\n  -i app/views \\\n  -t Crails::RssTemplate \\\n  -z crails/rss_template.hpp \\\n  -n " << ( rss_renderer_classname );
+  ecpp_stream << " \\\n  -p \\.rss$ \\\n  -v";
  };
   ecpp_stream << "";
  if (with_javascript){
@@ -45,6 +47,7 @@ private:
   std::string project_name;
   std::string html_renderer_classname;
   std::string json_renderer_classname;
+  std::string rss_renderer_classname;
   bool with_javascript;
   bool with_json;
   bool with_rss;

@@ -50,4 +50,5 @@ void NewPlugin::load_options()
   renderer.vars["project_name"] = project_name;
   renderer.vars["html_renderer_classname"] = Crails::naming_convention.classnames(project_name + "PluginHtmlRenderer");
   renderer.vars["json_renderer_classname"] = Crails::naming_convention.classnames(project_name + "PluginJsonRenderer");
+  renderer.vars["rss_renderer_classname"] = Crails::naming_convention.classnames(project_name + "PluginRssRenderer");
 }
