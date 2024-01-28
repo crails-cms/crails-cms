@@ -1,7 +1,7 @@
 std::string @project_name;
 std::string library_name = project_name + "_layout";
 // END LINKING
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(<%= library_name %>_plugin)
 
@@ -21,3 +21,4 @@ file(GLOB plugin_files
 add_library(<%= library_name %> SHARED ${plugin_files})
 set_property(TARGET <%= library_name %> PROPERTY ENABLE_EXPORTS ON)
 target_link_libraries(<%= library_name %> ${CRAILS_CMS_LIBRARIES})
+install(TARGETS <%= library_name %> LIBRARY DESTINATION lib/libcrails-cms/layouts)

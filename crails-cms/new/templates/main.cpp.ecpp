@@ -19,16 +19,16 @@ using namespace Crails;
 
 int main(int argc, const char **argv)
 {
-  SingletonInstantiator<ApplicationServer> server;
-  SingletonInstantiator<ApplicationRouter> router;
   SingletonInstantiator<ApplicationDatabases> databases;
-  SingletonInstantiator<ApplicationI18n> translations;
-  SingletonInstantiator<ApplicationMenus> menus;
-  SingletonInstantiator<ApplicationLayouts> layouts;
-  SingletonInstantiator<ApplicationRenderers> renderers;
-  SingletonInstantiator<ApplicationPlugins> plugins;
   SingletonInstantiator<Crails::Cms::Routes> cms_routes;
   SingletonInstantiator<Crails::Cms::Style> style;
+  SingletonInstantiator<ApplicationLayouts> layouts;
+  SingletonInstantiator<ApplicationI18n> translations;
+  SingletonInstantiator<ApplicationServer> server;
+  SingletonInstantiator<ApplicationRouter> router;
+  SingletonInstantiator<ApplicationMenus> menus;
+  SingletonInstantiator<ApplicationRenderers> renderers;
+  SingletonInstantiator<ApplicationPlugins> plugins;
   SingletonInstantiator<Crails::Cms::AdminMenu> admin_menu;
   SingletonInstantiator<Crails::FontAwesome::V5> icon_theme;
 

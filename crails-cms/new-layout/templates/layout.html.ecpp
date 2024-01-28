@@ -7,11 +7,12 @@ std::string @style_classname;
 #include "lib/assets.hpp"
 #include "src/style.hpp"
 
+
+<%= style_classname %> style;
 const char* @yield;
 const Crails::Cms::Settings& @settings;
 std::string @page_title = settings.get_title();
 bool @render_footer = true;
-<%= style_classname %> style;
 
 // END LINKING
 <html lang="<%%= i18n::Settings::singleton::require().get_current_locale() %>">

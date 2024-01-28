@@ -13,7 +13,7 @@ public:
 
   void render()
   {
-ecpp_stream << "class " << ( layout_editor_name );
+ecpp_stream << "// Here goes the JavaScript for your theme's layout editor\nclass " << ( layout_editor_name );
   ecpp_stream << " extends PageEditor.LayoutEditor {\n}\n";
     std::string _out_buffer = ecpp_stream.str();
     _out_buffer = this->apply_post_render_filters(_out_buffer);

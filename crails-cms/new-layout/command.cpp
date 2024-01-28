@@ -24,6 +24,8 @@ int NewLayout::run()
       generate_file(".crails");
       generate_file("CMakeLists.txt");
       generate_file("prebuild.sh");
+      generate_file("package.json");
+      generate_file("webpack.config.js");
       generate_file("src/main.cpp");
       generate_file("src/style.hpp");
       generate_file("src/layout.hpp");
@@ -31,6 +33,7 @@ int NewLayout::run()
       renderer.generate_file("layouts/views/layouts/themes/layout.html", "views/layouts/themes/" + Crails::naming_convention.filenames(project_name) + ".html");
       generate_file("views/layouts/themes/layout.html");
       generate_file("javascripts/editor.js");
+      generate_file("javascripts/index.js");
       generate_file("stylesheets/admin.scss");
       generate_file("stylesheets/layout.scss");
       generate_file("stylesheets/_fonts.scss");

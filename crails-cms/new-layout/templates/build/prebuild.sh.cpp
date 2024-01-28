@@ -15,8 +15,8 @@ public:
 
   void render()
   {
-ecpp_stream << "#!/bin/sh\n\nSASS_COMMAND=node_modules/.bin/sass\n\ncrails templates build \\\n  -r html \\\n  -i views \\\n  -t Crails::HtmlTemplate \\\n  -z crails/html_template.hpp \\\n  -n " << ( renderer_classname );
-  ecpp_stream << " \\\n  -p \\.html$ \\\n  -v\n\nmkdir -p build/javascripts\nmkdir -p build/sass\n\nwebpack\ncp javascripts/editor.js build/javascripts/editor.js\n\n$SASS_COMMAND -s compressed \"stylesheets/layout.scss\" > build/sass/layout.css\n$SASS_COMMAND -s compressed \"stylesheets/admin.scss\"  > build/sass/admin.css\n\ncrails-builtin-assets \\\n  --inputs \"javascripts\" \"build/sass\" \"stylesheets/fonts\" \\\n  --output \"lib/assets\" \\\n  --classname \"" << ( assets_classname );
+ecpp_stream << "#!/bin/sh\n\nSASS_COMMAND=node_modules/.bin/sass\nWEBPACK_COMMAND=node_modules/.bin/webpack\n\ncrails templates build \\\n  -r html \\\n  -i views \\\n  -t Crails::HtmlTemplate \\\n  -z crails/html_template.hpp \\\n  -n " << ( renderer_classname );
+  ecpp_stream << " \\\n  -p \\.html$ \\\n  -v\n\nmkdir -p build/javascripts\nmkdir -p build/sass\n\nnpm install\n$WEBPACK_COMMAND\ncp javascripts/editor.js build/javascripts/editor.js\n\n$SASS_COMMAND -s compressed \"stylesheets/layout.scss\" > build/sass/layout.css\n$SASS_COMMAND -s compressed \"stylesheets/admin.scss\"  > build/sass/admin.css\n\ncrails-builtin-assets \\\n  --inputs \"javascripts\" \"build/sass\" \"stylesheets/fonts\" \\\n  --output \"lib/assets\" \\\n  --classname \"" << ( assets_classname );
   ecpp_stream << "\" \\\n  --compression \"gzip\" \\\n  --uri-root \"/cms/plugins/" << ( project_name );
   ecpp_stream << "/assets/\"\n";
     std::string _out_buffer = ecpp_stream.str();

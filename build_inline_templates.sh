@@ -168,6 +168,10 @@ $ECPP \
  -n PluginAppDatabaseCpp \
  -i $PLUGIN_TPL/database.cpp.ecpp \
  >  $PLUGIN_TPL/build/database.cpp
+$ECPP \
+ -n  PluginWebpackConfigJs \
+ -i $PLUGIN_TPL/webpack.config.js.ecpp \
+ >  $PLUGIN_TPL/build/webpack.config.js.cpp
 
 ##
 ## Layout plugin template
@@ -186,9 +190,9 @@ $ECPP \
  -i $PLUGIN_TPL/package.json.ecpp \
  >  $PLUGIN_TPL/build/package.json.cpp
 $ECPP \
- -n LayoutPluginWebpackConfigJson \
- -i $PLUGIN_TPL/webpack.config.json.ecpp \
- >  $PLUGIN_TPL/build/webpack.config.json.cpp
+ -n LayoutPluginWebpackConfigJs \
+ -i $PLUGIN_TPL/webpack.config.js.ecpp \
+ >  $PLUGIN_TPL/build/webpack.config.js.cpp
 $ECPP \
  -n LayoutPluginMainCpp \
  -i $PLUGIN_TPL/main.cpp.ecpp \
@@ -233,3 +237,7 @@ $ECPP \
  -n LayoutPluginEditorJs \
  -i $PLUGIN_TPL/editor.js.ecpp \
  >  $PLUGIN_TPL/build/editor.js.cpp
+$ECPP \
+ -n LayoutPluginIndexJs \
+ -i $PLUGIN_TPL/index.js.ecpp \
+ >  $PLUGIN_TPL/build/index.js.cpp

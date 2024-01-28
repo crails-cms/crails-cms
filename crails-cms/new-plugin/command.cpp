@@ -25,6 +25,7 @@ int NewPlugin::run()
       generate_file("CMakeLists.txt");
       generate_file("prebuild.sh");
       generate_file("package.json");
+      generate_file("webpack.config.js");
       generate_file("app/main.cpp");
       generate_file("app/routes.cpp");
       generate_file("app/renderers.cpp");

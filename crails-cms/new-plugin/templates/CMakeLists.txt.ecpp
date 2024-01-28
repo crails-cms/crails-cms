@@ -31,3 +31,4 @@ set_target_properties(<%= project_name %> PROPERTIES PREFIX "")
 target_link_libraries(<%= project_name %>
   ${CRAILS_CMS_LIBRARIES}
   crails-app)
+install(TARGETS <%= project_name %> LIBRARY DESTINATION lib/libcrails-cms)

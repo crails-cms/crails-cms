@@ -1,4 +1,5 @@
 std::string @layout_editor_name;
 // END LINKING
+// Here goes the JavaScript for your theme's layout editor
 class <%= layout_editor_name %> extends PageEditor.LayoutEditor {
 }

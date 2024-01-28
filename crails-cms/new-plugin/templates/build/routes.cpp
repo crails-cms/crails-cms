@@ -12,7 +12,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#include <crails/router.hpp>\n\nvoid initialize_plugin_routes()\n{\n  auto& router = Crails::Router::singleton::require();\n\n  // insert plugin routes here\n}\n";
+ecpp_stream << "#include <crails/router.hpp>\n#include <crails/cms/routes.hpp>\n\nvoid initialize_plugin_routes()\n{\n  auto& router = Crails::Router::singleton::require();\n  auto& cms_routes = Crails::Cms::Routes::singleton::require();\n\n  // insert plugin routes here\n}\n";
     std::string _out_buffer = ecpp_stream.str();
     _out_buffer = this->apply_post_render_filters(_out_buffer);
     this->target.set_body(_out_buffer);

@@ -17,9 +17,9 @@ ecpp_stream << "#include <string>\n\nvoid initialize_plugin_routes();\nvoid init
   ecpp_stream << "_plugin_application_js[];\nextern unsigned int  " << ( project_name );
   ecpp_stream << "_plugin_application_js_len;\nextern unsigned char " << ( project_name );
   ecpp_stream << "_plugin_admin_js[];\nextern unsigned int  " << ( project_name );
-  ecpp_stream << "_plugin_admin_js_len;\n\nextern \"C\"\n{\n  void initialize()\n  {\n    initialize_plugin_routes();\n    initialize_plugin_renderers();\n  }\n\n  void install()\n  {\n    install_plugin_database();\n  }\n\n  void uninstall()\n  {\n    uninstall_plugin_database();\n  }\n\n  std::string javascript()\n  {\n    return std::string(\n      reinterpret_cast<const char*>(" << ( project_name );
+  ecpp_stream << "_plugin_admin_js_len;\n\nextern \"C\"\n{\n  void initialize()\n  {\n    initialize_plugin_routes();\n    initialize_plugin_renderers();\n  }\n\n  void install()\n  {\n    install_plugin_database();\n  }\n\n  void uninstall()\n  {\n    uninstall_plugin_database();\n  }\n\n  std::string_view plugin_javascript()\n  {\n    return std::string_view(\n      reinterpret_cast<const char*>(" << ( project_name );
   ecpp_stream << "_plugin_application_js),\n      " << ( project_name );
-  ecpp_stream << "_plugin_application_js_len\n    );\n  }\n\n  std::string admin_javascript()\n  {\n    return std::string(\n      reinterpret_cast<const char*>(" << ( project_name );
+  ecpp_stream << "_plugin_application_js_len\n    );\n  }\n\n  std::string_view plugin_admin_javascript()\n  {\n    return std::string_view(\n      reinterpret_cast<const char*>(" << ( project_name );
   ecpp_stream << "_plugin_admin_js),\n      " << ( project_name );
   ecpp_stream << "_plugin_admin_js_len\n    );\n  }\n}\n";
     std::string _out_buffer = ecpp_stream.str();

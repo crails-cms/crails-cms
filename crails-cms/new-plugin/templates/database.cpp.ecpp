@@ -8,7 +8,7 @@ void install_plugin_database()
   // insert table creation here
   // Example:
   //
-  //  database.transaction.get_database().execute(
+  //  database.execute(
   //    "CREATE TABLE \"Plugin_ClassName\" ();"
   //  );
   //

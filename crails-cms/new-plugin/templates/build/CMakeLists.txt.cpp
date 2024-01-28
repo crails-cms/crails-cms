@@ -18,7 +18,8 @@ ecpp_stream << "cmake_minimum_required(VERSION 3.5)\n\nproject(crails-cms-" << (
   ecpp_stream << " SHARED ${plugin_files})\nadd_definitions(-DWITH_ODB)\nset_target_properties(" << ( project_name );
   ecpp_stream << " PROPERTIES ENABLE_EXPORTS ON)\nset_target_properties(" << ( project_name );
   ecpp_stream << " PROPERTIES PREFIX \"\")\ntarget_link_libraries(" << ( project_name );
-  ecpp_stream << "\n  ${CRAILS_CMS_LIBRARIES}\n  crails-app)\n";
+  ecpp_stream << "\n  ${CRAILS_CMS_LIBRARIES}\n  crails-app)\ninstall(TARGETS " << ( project_name );
+  ecpp_stream << " LIBRARY DESTINATION lib/libcrails-cms)\n";
     std::string _out_buffer = ecpp_stream.str();
     _out_buffer = this->apply_post_render_filters(_out_buffer);
     this->target.set_body(_out_buffer);

@@ -46,7 +46,7 @@ declare_renderer(project_controllers_admin_opengraph_hpp)
 
 declare_renderer(layout_plugin_crailsfile)
 declare_renderer(layout_plugin_cmakelists_txt)
-declare_renderer(layout_plugin_webpack_config_json)
+declare_renderer(layout_plugin_webpack_config_js)
 declare_renderer(layout_plugin_package_json)
 declare_renderer(layout_plugin_main_cpp)
 declare_renderer(layout_plugin_prebuild_sh)
@@ -59,6 +59,7 @@ declare_renderer(layout_plugin_admin_scss)
 declare_renderer(layout_plugin_fonts_scss)
 declare_renderer(layout_plugin_theme_scss)
 declare_renderer(layout_plugin_editor_js)
+declare_renderer(layout_plugin_index_js)
 
 declare_renderer(plugin_crailsfile)
 declare_renderer(plugin_cmakelists_txt)
@@ -68,6 +69,7 @@ declare_renderer(plugin_app_main_cpp)
 declare_renderer(plugin_app_routes_cpp)
 declare_renderer(plugin_app_renderers_cpp)
 declare_renderer(plugin_app_database_cpp)
+declare_renderer(plugin_webpack_config_js)
 
 ProjectRenderer::ProjectRenderer()
 {
@@ -106,7 +108,7 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("layouts/.crails", layout_plugin_crailsfile);
   add_renderer("layouts/CMakeLists.txt", layout_plugin_cmakelists_txt);
   add_renderer("layouts/package.json", layout_plugin_package_json);
-  add_renderer("layouts/webpack.config.json", layout_plugin_webpack_config_json);
+  add_renderer("layouts/webpack.config.js", layout_plugin_webpack_config_js);
   add_renderer("layouts/prebuild.sh", layout_plugin_prebuild_sh);
   add_renderer("layouts/src/main.cpp", layout_plugin_main_cpp);
   add_renderer("layouts/src/style.hpp", layout_plugin_style_hpp);
@@ -114,6 +116,7 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("layouts/src/layout.cpp", layout_plugin_layout_cpp);
   add_renderer("layouts/views/layouts/themes/layout.html", layout_plugin_layout_html);
   add_renderer("layouts/javascripts/editor.js", layout_plugin_editor_js);
+  add_renderer("layouts/javascripts/index.js", layout_plugin_index_js);
   add_renderer("layouts/stylesheets/admin.scss", layout_plugin_admin_scss);
   add_renderer("layouts/stylesheets/layout.scss", layout_plugin_layout_scss);
   add_renderer("layouts/stylesheets/_fonts.scss", layout_plugin_fonts_scss);
@@ -127,4 +130,5 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("plugins/app/routes.cpp", plugin_app_routes_cpp);
   add_renderer("plugins/app/renderers.cpp", plugin_app_renderers_cpp);
   add_renderer("plugins/app/database.cpp", plugin_app_database_cpp);
+  add_renderer("plugins/webpack.config.js", plugin_webpack_config_js);
 }

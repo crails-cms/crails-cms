@@ -72,7 +72,9 @@ odb \
 ##
 plugin_odb_hxx="`pwd`/lib/plugin-odb.hxx"
 cd app/models
-rm "$plugin_odb_hxx"
+if [ -f "$plugin_odb_hxx" ] ; then
+  rm "$plugin_odb_hxx"
+fi
 echo "#pragma once" >> "$plugin_odb_hxx"
 echo "#include \"lib/odb/application-odb.hxx\"" >> "$plugin_odb_hxx"
 for filename in `find . -name "*.h*"` ; do

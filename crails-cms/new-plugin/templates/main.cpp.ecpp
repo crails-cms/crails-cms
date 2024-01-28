@@ -30,17 +30,17 @@ extern "C"
     uninstall_plugin_database();
   }
 
-  std::string javascript()
+  std::string_view plugin_javascript()
   {
-    return std::string(
+    return std::string_view(
       reinterpret_cast<const char*>(<%= project_name %>_plugin_application_js),
       <%= project_name %>_plugin_application_js_len
     );
   }
 
-  std::string admin_javascript()
+  std::string_view plugin_admin_javascript()
   {
-    return std::string(
+    return std::string_view(
       reinterpret_cast<const char*>(<%= project_name %>_plugin_admin_js),
       <%= project_name %>_plugin_admin_js_len
     );
