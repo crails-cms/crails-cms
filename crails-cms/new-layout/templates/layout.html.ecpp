@@ -20,7 +20,7 @@ bool @render_footer = true;
     <title><%%= page_title %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <%% partial("layouts/head") %>
+    <%%= partial("layouts/head") %>
     <%%= tag("link", {{"rel","stylesheet"},{"href", <%= assets_classname %>::layout_css}}) %>
   </head>
   <body>
