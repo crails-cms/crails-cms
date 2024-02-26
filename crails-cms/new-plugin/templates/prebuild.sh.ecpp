@@ -24,8 +24,10 @@ crails templates build \
 <% if (with_json) do -%>
 crails templates build \
   -r json \
+  -m raw \
   -i app/views \
   -t Crails::JsonTemplate \
+  --stream-property stream \
   -z crails/json_template.hpp \
   -n <%= json_renderer_classname %> \
   -p \.json$ \

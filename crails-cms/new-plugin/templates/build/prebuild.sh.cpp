@@ -22,7 +22,7 @@ public:
 ecpp_stream << "#!/bin/sh\n\n##\n## Renderers\n##\ncrails templates build \\\n  -r html \\\n  -i app/views \\\n  -t Crails::HtmlTemplate \\\n  -z crails/html_template.hpp \\\n  -n " << ( html_renderer_classname );
   ecpp_stream << " \\\n  -p \\.html$ \\\n  -v\n";
  if (with_json){
-  ecpp_stream << "\ncrails templates build \\\n  -r json \\\n  -i app/views \\\n  -t Crails::JsonTemplate \\\n  -z crails/json_template.hpp \\\n  -n " << ( json_renderer_classname );
+  ecpp_stream << "\ncrails templates build \\\n  -r json \\\n  -m raw \\\n  -i app/views \\\n  -t Crails::JsonTemplate \\\n  --stream-property stream \\\n  -z crails/json_template.hpp \\\n  -n " << ( json_renderer_classname );
   ecpp_stream << " \\\n  -p \\.json$ \\\n  -v";
  };
   ecpp_stream << "";
