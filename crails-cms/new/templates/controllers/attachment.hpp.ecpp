@@ -1,0 +1,19 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("AttachmentController");
+std::string parent_class = Crails::naming_convention.classnames("ApplicationController");
+std::string traits_class = Crails::naming_convention.classnames("AttachmentTraits");
+std::string super_class = "Crails::Cms::AttachmentController<" + traits_class + ", " + parent_class + '>';
+
+// END LINKING
+#pragma once
+#include <crails/cms/controllers/attachments.hpp>
+#include "application.hpp"
+#include "../models/attachment_traits.hpp"
+
+class <%= classname %> : public <%= super_class %>
+{
+  typedef <%= super_class %> Super;
+public:
+  <%= classname %>(Crails::Context&);
+};

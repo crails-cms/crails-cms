@@ -9,6 +9,7 @@
 #include "controllers/home.hpp"
 #include "controllers/signin.hpp"
 #include "controllers/page.hpp"
+#include "controllers/attachment.hpp"
 #include "controllers/admin/page.hpp"
 #include "controllers/admin/user.hpp"
 #include "controllers/admin/user_group.hpp"
@@ -30,6 +31,11 @@ ApplicationRouter::ApplicationRouter()
   Crails::Cms::initialize_cms_routes(*this);
 
   scope("/pages", <%= CMS_ROUTES(register_page_routes, PageController) %>);
+
+  scope("/attachments", [&]()
+  {
+    cms_routes.register_attachments_routes<<%= CLASSNAME(AttachmentController) %>>(*this);
+  });
 
   scope("/admin", [&]()
   {

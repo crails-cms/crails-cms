@@ -1,0 +1,12 @@
+#include <crails/cli/conventions.hpp>
+
+std::string classname = Crails::naming_convention.classnames("AttachmentController");
+std::string parent_class = Crails::naming_convention.classnames("ApplicationController");
+
+// END LINKING
+#include "attachment.hpp"
+#include "lib/odb/application-odb.hxx"
+
+<%= classname %>::<%= classname %>(Crails::Context& context) : Super(context)
+{
+}

@@ -112,6 +112,14 @@ $ECPP \
  -i $PROJECT_TPL/controllers/home.cpp.ecpp \
  >  $PROJECT_TPL/build/home_controller.cpp.cpp
 $ECPP \
+ -n ProjectControllersAttachmentHpp \
+ -i $PROJECT_TPL/controllers/attachment.hpp.ecpp \
+ >  $PROJECT_TPL/build/attachment_controller.hpp.cpp
+$ECPP \
+ -n ProjectControllersAttachmentCpp \
+ -i $PROJECT_TPL/controllers/attachment.cpp.ecpp \
+ >  $PROJECT_TPL/build/attachment_controller.cpp.cpp
+$ECPP \
  -n ProjectControllersResourceHpp \
  -i $PROJECT_TPL/controllers/resource.hpp.ecpp \
  >  $PROJECT_TPL/build/resource_controller.hpp.cpp

@@ -115,6 +115,8 @@ void New::generate_controllers()
   generate_file("app/controllers/application.cpp");
   generate_file("app/controllers/home.hpp");
   generate_file("app/controllers/home.cpp");
+  generate_file("app/controllers/attachment.hpp");
+  generate_file("app/controllers/attachment.cpp");
   generate_file("app/controllers/signin.hpp");
   generate_file("app/controllers/signin.cpp");
   for (std::string resource_name : controllers)

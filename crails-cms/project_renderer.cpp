@@ -38,6 +38,8 @@ declare_renderer(project_controllers_signin_cpp)
 declare_renderer(project_controllers_signin_hpp)
 declare_renderer(project_controllers_home_hpp)
 declare_renderer(project_controllers_home_cpp)
+declare_renderer(project_controllers_attachment_hpp)
+declare_renderer(project_controllers_attachment_cpp)
 declare_renderer(project_controllers_resource_hpp)
 declare_renderer(project_controllers_admin_application_hpp)
 declare_renderer(project_controllers_admin_resource_hpp)
@@ -99,6 +101,8 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("app/controllers/signin.cpp", project_controllers_signin_cpp);
   add_renderer("app/controllers/home.hpp", project_controllers_home_hpp);
   add_renderer("app/controllers/home.cpp", project_controllers_home_cpp);
+  add_renderer("app/controllers/attachment.hpp", project_controllers_attachment_hpp);
+  add_renderer("app/controllers/attachment.cpp", project_controllers_attachment_cpp);
   add_renderer("app/controllers/resource.hpp", project_controllers_resource_hpp);
   add_renderer("app/controllers/admin/application.hpp", project_controllers_admin_application_hpp);
   add_renderer("app/controllers/admin/resource.hpp", project_controllers_admin_resource_hpp);
