@@ -18,7 +18,7 @@ public:
   void render()
   {
 ecpp_stream << "#include  \"" << ( filename );
-  ecpp_stream << ".hpp\"\n#include \"lib/odb/application-odb.hxx\"\n\nodb_instantiable_impl(" << ( classname );
+  ecpp_stream << ".hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n\nodb_instantiable_impl(" << ( classname );
   ecpp_stream << ")\n";
     std::string _out_buffer = ecpp_stream.str();
     _out_buffer = this->apply_post_render_filters(_out_buffer);

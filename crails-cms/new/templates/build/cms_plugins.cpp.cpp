@@ -12,7 +12,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#include <crails/odb/connection.hpp>\n#include \"plugins.hpp\"\n#include \"app/models/settings.hpp\"\n#include \"autogen/odb/application-odb.hxx\"\n\nApplicationPlugins::ApplicationPlugins()\n{\n  Crails::Odb::Connection database;\n  std::shared_ptr<Settings> settings;\n\n  database.find_one(settings);\n  if (settings)\n    initialize(settings->get_plugins());\n}\n";
+ecpp_stream << "#include <crails/odb/connection.hpp>\n#include \"plugins.hpp\"\n#include \"app/models/settings.hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n\nApplicationPlugins::ApplicationPlugins()\n{\n  Crails::Odb::Connection database;\n  std::shared_ptr<Settings> settings;\n\n  database.find_one(settings);\n  if (settings)\n    initialize(settings->get_plugins());\n}\n";
     std::string _out_buffer = ecpp_stream.str();
     _out_buffer = this->apply_post_render_filters(_out_buffer);
     this->target.set_body(_out_buffer);

@@ -14,7 +14,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#include <crails/cms/views/layout.hpp>\n#include \"application.hpp\"\n#include \"lib/odb/application-odb.hxx\"\n\nusing namespace std;\n" << ( classname );
+ecpp_stream << "#include <crails/cms/views/layout.hpp>\n#include \"application.hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n\nusing namespace std;\n" << ( classname );
   ecpp_stream << "::" << ( classname );
   ecpp_stream << "(Crails::Context& context) : Crails::Cms::Controller(context)\n{\n}\n\nshared_ptr<Crails::Cms::Settings> " << ( classname );
   ecpp_stream << "::find_settings()\n{\n  if (!settings)\n  {\n    shared_ptr<" << ( Crails::naming_convention.classnames("Settings") );

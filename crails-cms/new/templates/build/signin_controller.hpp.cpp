@@ -18,7 +18,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#include <crails/signin/session_controller.hpp>\n#include <crails/odb/controller.hpp>\n#include \"application.hpp\"\n#include \"../models/user.hpp\"\n#include \"autogen/odb/application-odb.hxx\"\n\nclass " << ( classname );
+ecpp_stream << "#include <crails/signin/session_controller.hpp>\n#include <crails/odb/controller.hpp>\n#include \"application.hpp\"\n#include \"../models/user.hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n\nclass " << ( classname );
   ecpp_stream << " : public " << ( super );
   ecpp_stream << "\n{\n  typedef " << ( super );
   ecpp_stream << " Super;\npublic:\n  " << ( classname );

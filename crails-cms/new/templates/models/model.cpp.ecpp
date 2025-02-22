@@ -7,6 +7,6 @@ std::string filename = Crails::naming_convention.filenames(resource_name);
 
 // END LINKING
 #include  "<%= filename %>.hpp"
-#include "lib/odb/application-odb.hxx"
+#include "app/autogen/odb/application-odb.hpp"
 
 odb_instantiable_impl(<%= classname %>)

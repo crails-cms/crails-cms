@@ -1,7 +1,7 @@
 #include <crails/odb/connection.hpp>
 #include "plugins.hpp"
 #include "app/models/settings.hpp"
-#include "autogen/odb/application-odb.hxx"
+#include "app/autogen/odb/application-odb.hpp"
 
 ApplicationPlugins::ApplicationPlugins()
 {

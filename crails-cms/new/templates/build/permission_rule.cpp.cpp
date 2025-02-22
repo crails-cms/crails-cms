@@ -18,7 +18,7 @@ public:
   void render()
   {
 ecpp_stream << "#include \"" << ( Crails::naming_convention.filenames("permission_rule") );
-  ecpp_stream << ".hpp\"\n#include \"lib/odb/application-odb.hxx\"\n#include <crails/odb/any.hpp>\n\nodb_instantiable_impl(PermissionRule)\n\nusing namespace Crails;\nusing namespace std;\n\nstatic const map<string, PermissionRule::PermissionSetter> permission_setters = {\n  {\"read_groups\",    &PermissionRule::set_read_groups<vector<" << ( group_classname );
+  ecpp_stream << ".hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n#include <crails/odb/any.hpp>\n\nodb_instantiable_impl(PermissionRule)\n\nusing namespace Crails;\nusing namespace std;\n\nstatic const map<string, PermissionRule::PermissionSetter> permission_setters = {\n  {\"read_groups\",    &PermissionRule::set_read_groups<vector<" << ( group_classname );
   ecpp_stream << ">>},\n  {\"write_groups\",   &PermissionRule::set_write_groups<vector<" << ( group_classname );
   ecpp_stream << ">>},\n  {\"destroy_groups\", &PermissionRule::set_destroy_groups<vector<" << ( group_classname );
   ecpp_stream << ">>}\n};\n\nstatic odb::query<" << ( group_classname );

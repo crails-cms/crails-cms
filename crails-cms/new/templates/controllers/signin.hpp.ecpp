@@ -11,7 +11,7 @@ std::string super = "Crails::SessionController<"
 #include <crails/odb/controller.hpp>
 #include "application.hpp"
 #include "../models/user.hpp"
-#include "autogen/odb/application-odb.hxx"
+#include "app/autogen/odb/application-odb.hpp"
 
 class <%= classname %> : public <%= super %>
 {

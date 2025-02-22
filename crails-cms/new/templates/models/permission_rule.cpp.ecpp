@@ -6,7 +6,7 @@ std::string classname = Crails::naming_convention.classnames(resource_name);
 std::string group_classname = Crails::naming_convention.classnames("user_group");
 // END LINKING
 #include "<%= Crails::naming_convention.filenames("permission_rule") %>.hpp"
-#include "lib/odb/application-odb.hxx"
+#include "app/autogen/odb/application-odb.hpp"
 #include <crails/odb/any.hpp>
 
 odb_instantiable_impl(PermissionRule)

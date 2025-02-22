@@ -5,7 +5,7 @@
 // END LINKING
 #include <crails/cms/routes.hpp>
 #include "config/router.hpp"
-#include "autogen/odb/application-odb.hxx"
+#include "autogen/odb/application-odb.hpp"
 #include "controllers/home.hpp"
 #include "controllers/signin.hpp"
 #include "controllers/page.hpp"

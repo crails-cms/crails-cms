@@ -5,7 +5,7 @@ std::string classname = Crails::naming_convention.classnames("ApplicationControl
 // END LINKING
 #include <crails/cms/views/layout.hpp>
 #include "application.hpp"
-#include "lib/odb/application-odb.hxx"
+#include "app/autogen/odb/application-odb.hpp"
 
 using namespace std;
 

@@ -15,7 +15,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#include \"attachment.hpp\"\n#include \"autogen/odb/application-odb.hxx\"\n" << ( classname );
+ecpp_stream << "#include \"attachment.hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n" << ( classname );
   ecpp_stream << "::" << ( classname );
   ecpp_stream << "(Crails::Context& context) : Super(context)\n{\n}\n";
     std::string _out_buffer = ecpp_stream.str();
