@@ -44,6 +44,14 @@ $ECPP \
  -i $PROJECT_TPL/config/cms_plugins.cpp.ecpp \
  >  $PROJECT_TPL/build/cms_plugins.cpp.cpp
 $ECPP \
+ -n ProjectConfigCmsSitemapHpp \
+ -i $PROJECT_TPL/config/cms_sitemap.hpp.ecpp \
+ >  $PROJECT_TPL/build/cms_sitemap.hpp.cpp
+$ECPP \
+ -n ProjectConfigCmsSitemapCpp \
+ -i $PROJECT_TPL/config/cms_sitemap.cpp.ecpp \
+ >  $PROJECT_TPL/build/cms_sitemap.cpp.cpp
+$ECPP \
  -n ProjectModelsTraits \
  -i $PROJECT_TPL/models/traits.hpp.ecpp \
  >  $PROJECT_TPL/build/traits.hpp.cpp

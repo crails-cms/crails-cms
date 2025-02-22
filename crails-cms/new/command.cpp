@@ -36,6 +36,8 @@ int New::run()
       generate_file("app/config/cms/menus.hpp");
       generate_file("app/config/cms/plugins.hpp");
       generate_file("app/config/cms/plugins.cpp");
+      generate_file("app/config/cms/sitemap.hpp");
+      generate_file("app/config/cms/sitemap.cpp");
     }
   }
   return -1;

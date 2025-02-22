@@ -1,0 +1,28 @@
+#include "sitemap.hpp"
+#include <crails/cms/controllers/sitemap.hpp>
+#include <crails/cms/sitemap_resource.hpp>
+#include <crails/odb/connection.hpp>
+#include "app/controllers/page.hpp"
+#include "app/autogen/odb/application-odb.hpp"
+
+using namespace std;
+using namespace Crails;
+
+shared_ptr<Cms::Settings> ApplicationSiteMap::find_settings() const
+{
+  Crails::Odb::ConnectionHandle database;
+  shared_ptr<Settings> result;
+
+  if (!database.find_one(result))
+    result = make_shared<Settings>();
+  return result;
+}
+
+void ApplicationSiteMap::initialize()
+{
+  add_index(
+    "Pages",
+    make_unique<Cms::SiteMap::ResourceIndex<PageController, PageTraits>>()
+  );
+  initialize_plugin_indexes();
+}

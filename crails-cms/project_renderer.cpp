@@ -21,6 +21,8 @@ declare_renderer(project_config_cms_layouts_cpp)
 declare_renderer(project_config_cms_menus_hpp)
 declare_renderer(project_config_cms_plugins_hpp)
 declare_renderer(project_config_cms_plugins_cpp)
+declare_renderer(project_config_cms_sitemap_hpp)
+declare_renderer(project_config_cms_sitemap_cpp)
 declare_renderer(project_models_traits)
 declare_renderer(project_models_model_hpp)
 declare_renderer(project_models_model_cpp)
@@ -84,6 +86,8 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("app/config/cms/menus.hpp", project_config_cms_menus_hpp);
   add_renderer("app/config/cms/plugins.hpp", project_config_cms_plugins_hpp);
   add_renderer("app/config/cms/plugins.cpp", project_config_cms_plugins_cpp);
+  add_renderer("app/config/cms/sitemap.hpp", project_config_cms_sitemap_hpp);
+  add_renderer("app/config/cms/sitemap.cpp", project_config_cms_sitemap_cpp);
   add_renderer("app/models/traits.hpp", project_models_traits);
   add_renderer("app/models/model.hpp", project_models_model_hpp);
   add_renderer("app/models/model.cpp", project_models_model_cpp);

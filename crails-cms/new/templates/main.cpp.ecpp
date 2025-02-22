@@ -8,6 +8,7 @@
 #include "config/cms/layouts.hpp"
 #include "config/cms/menus.hpp"
 #include "config/cms/plugins.hpp"
+#include "config/cms/sitemap.hpp"
 #include "config/i18n.hpp"
 #include "config/renderers.hpp"
 #include "config/databases.hpp"
@@ -29,6 +30,7 @@ int main(int argc, const char **argv)
   SingletonInstantiator<ApplicationMenus> menus;
   SingletonInstantiator<ApplicationRenderers> renderers;
   SingletonInstantiator<ApplicationPlugins> plugins;
+  SingletonInstantiator<ApplicationSitemap> sitemap;
   SingletonInstantiator<Crails::Cms::AdminMenu> admin_menu;
   SingletonInstantiator<Crails::FontAwesome::V5> icon_theme;
 

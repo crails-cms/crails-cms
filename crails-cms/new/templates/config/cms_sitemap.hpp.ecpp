@@ -1,0 +1,11 @@
+#pragma once
+#include <crails/cms/controllers/sitemap.hpp>
+
+class ApplicationSiteMap : public Crails::Cms::SiteMap::Controller
+{
+  SINGLETON_IMPLEMENTATION(ApplicationSiteMap, Crails::Cms::SiteMap::Controller)
+
+  std::shared_ptr<Crails::Cms::Settings> find_settings() const override;
+public:
+  void initialize();
+};
