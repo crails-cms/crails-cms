@@ -5,7 +5,7 @@ std::string parent_class = Crails::naming_convention.classnames("ApplicationCont
 
 // END LINKING
 #include "attachment.hpp"
-#include "lib/odb/application-odb.hxx"
+#include "autogen/odb/application-odb.hxx"
 
 <%= classname %>::<%= classname %>(Crails::Context& context) : Super(context)
 {

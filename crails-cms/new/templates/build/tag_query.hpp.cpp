@@ -10,8 +10,8 @@ class render_ProjectModelsTagQueryHpp : public Crails::Template
 public:
   render_ProjectModelsTagQueryHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    resource_name(Crails::cast<std::string>(vars, "resource_name")), 
-    tag_query(Crails::cast<std::string>(vars, "tag_query")), 
+    resource_name(Crails::cast< std::string >(vars, "resource_name")), 
+    tag_query(Crails::cast< std::string >(vars, "tag_query")), 
     classname( Crails::naming_convention.classnames(resource_name))
   {}
 

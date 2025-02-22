@@ -5,12 +5,12 @@ std::string @project_name;
 // END LINKING
 
 #include "renderers.hpp"
-#include "lib/renderers/<%= Crails::underscore(project_name) %>_html_renderer.hpp"
-#include "lib/renderers/<%= Crails::underscore(project_name) %>_json_renderer.hpp"
-#include "lib/renderers/<%= Crails::underscore(project_name) %>_rss_renderer.hpp"
-#include <crails/cms/lib/renderers/crails_cms_html_renderer.hpp>
-#include <crails/cms/lib/renderers/crails_cms_json_renderer.hpp>
-#include <crails/cms/lib/renderers/crails_cms_rss_renderer.hpp>
+#include "autogen/renderers/<%= Crails::underscore(project_name) %>_html_renderer.hpp"
+#include "autogen/renderers/<%= Crails::underscore(project_name) %>_json_renderer.hpp"
+#include "autogen/renderers/<%= Crails::underscore(project_name) %>_rss_renderer.hpp"
+#include <crails/cms/autogen/renderers/crails_cms_html_renderer.hpp>
+#include <crails/cms/autogen/renderers/crails_cms_json_renderer.hpp>
+#include <crails/cms/autogen/renderers/crails_cms_rss_renderer.hpp>
 #include <crails/cms/views/layout.hpp>
 
 using namespace Crails;

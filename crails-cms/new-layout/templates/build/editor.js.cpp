@@ -8,7 +8,7 @@ class render_LayoutPluginEditorJs : public Crails::Template
 public:
   render_LayoutPluginEditorJs(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    layout_editor_name(Crails::cast<std::string>(vars, "layout_editor_name"))
+    layout_editor_name(Crails::cast< std::string >(vars, "layout_editor_name"))
   {}
 
   void render()

@@ -8,7 +8,7 @@ class render_LayoutPluginCmakelistsTxt : public Crails::Template
 public:
   render_LayoutPluginCmakelistsTxt(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    project_name(Crails::cast<std::string>(vars, "project_name")), 
+    project_name(Crails::cast< std::string >(vars, "project_name")), 
     library_name( project_name + "_layout")
   {}
 

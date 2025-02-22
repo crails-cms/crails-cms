@@ -5,7 +5,7 @@
 #include <crails/request_handlers/action.hpp>
 #include <crails/request_parser.hpp>
 #include <crails/cms/views/layout.hpp>
-#include <crails/cms/lib/assets.hpp>
+#include <crails/cms/autogen/assets.hpp>
 #include <crails/cms/plugins.hpp>
 #include "server.hpp"
 

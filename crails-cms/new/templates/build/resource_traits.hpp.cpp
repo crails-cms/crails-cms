@@ -10,12 +10,12 @@ class render_ProjectModelsResourceTraitsHpp : public Crails::Template
 public:
   render_ProjectModelsResourceTraitsHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    resource_name(Crails::cast<std::string>(vars, "resource_name")), 
+    resource_name(Crails::cast< std::string >(vars, "resource_name")), 
     traits_header( Crails::naming_convention.filenames("traits")), 
     traits_classname( Crails::naming_convention.classnames("application_traits")), 
     classname( Crails::naming_convention.classnames(resource_name + "_traits")), 
     model_name( Crails::naming_convention.classnames(resource_name)), 
-    tag_query(Crails::cast<std::string>(vars, "tag_query",  ""))
+    tag_query(Crails::cast< std::string >(vars, "tag_query",  ""))
   {}
 
   void render()

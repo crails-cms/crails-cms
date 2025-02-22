@@ -8,7 +8,7 @@ class render_LayoutPluginStyleHpp : public Crails::Template
 public:
   render_LayoutPluginStyleHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    style_classname(Crails::cast<std::string>(vars, "style_classname"))
+    style_classname(Crails::cast< std::string >(vars, "style_classname"))
   {}
 
   void render()

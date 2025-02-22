@@ -9,7 +9,7 @@ class render_LayoutPluginLayoutHpp : public Crails::Template
 public:
   render_LayoutPluginLayoutHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    project_name(Crails::cast<std::string>(vars, "project_name")), 
+    project_name(Crails::cast< std::string >(vars, "project_name")), 
     classname( Crails::naming_convention.classnames(project_name))
   {}
 

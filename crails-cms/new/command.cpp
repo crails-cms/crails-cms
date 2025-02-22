@@ -27,15 +27,15 @@ int New::run()
       generate_controllers();
       generate_admin_controllers();
       generate_models();
-      generate_file("app/main.cpp");
+      generate_file("exe/server/main.cpp");
       generate_file("app/routes.cpp");
-      generate_file("config/renderers.cpp");
-      generate_file("config/request_pipe.cpp");
-      generate_file("config/cms/layouts.hpp");
-      generate_file("config/cms/layouts.cpp");
-      generate_file("config/cms/menus.hpp");
-      generate_file("config/cms/plugins.hpp");
-      generate_file("config/cms/plugins.cpp");
+      generate_file("app/config/renderers.cpp");
+      generate_file("app/config/request_pipe.cpp");
+      generate_file("app/config/cms/layouts.hpp");
+      generate_file("app/config/cms/layouts.cpp");
+      generate_file("app/config/cms/menus.hpp");
+      generate_file("app/config/cms/plugins.hpp");
+      generate_file("app/config/cms/plugins.cpp");
     }
   }
   return -1;
@@ -101,8 +101,7 @@ bool New::add_crails_plugins()
   results += Crails::run_command(crails_bin + " plugins extra -a libcrails-paginator");
   cout << "+ " << crails_bin << " plugins extra -a libcrails-cms" << endl;
   results += Crails::run_command(crails_bin + " plugins extra -a libcrails-cms");
-  return true;
-  //return results != 0;
+  return results != 0;
 }
 
 void New::generate_controllers()

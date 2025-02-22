@@ -10,7 +10,7 @@ class render_ProjectModelsUserGroupCpp : public Crails::Template
 public:
   render_ProjectModelsUserGroupCpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    resource_name(Crails::cast<std::string>(vars, "resource_name")), 
+    resource_name(Crails::cast< std::string >(vars, "resource_name")), 
     classname( Crails::naming_convention.classnames(resource_name)), 
     filename( Crails::naming_convention.filenames(resource_name))
   {}

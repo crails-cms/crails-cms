@@ -7,7 +7,7 @@ std::string parent_class = Crails::naming_convention.classnames("ApplicationCont
 #include <crails/cms/views/layout.hpp>
 #include "home.hpp"
 #include "app/models/homepage.hpp"
-#include "lib/odb/application-odb.hxx"
+#include "autogen/odb/application-odb.hxx"
 
 using namespace std;
 

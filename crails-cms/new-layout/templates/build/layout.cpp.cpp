@@ -9,10 +9,10 @@ class render_LayoutPluginLayoutCpp : public Crails::Template
 public:
   render_LayoutPluginLayoutCpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    project_name(Crails::cast<std::string>(vars, "project_name")), 
-    layout_editor_name(Crails::cast<std::string>(vars, "layout_editor_name")), 
-    assets_classname(Crails::cast<std::string>(vars, "assets_classname")), 
-    style_classname(Crails::cast<std::string>(vars, "style_classname")), 
+    project_name(Crails::cast< std::string >(vars, "project_name")), 
+    layout_editor_name(Crails::cast< std::string >(vars, "layout_editor_name")), 
+    assets_classname(Crails::cast< std::string >(vars, "assets_classname")), 
+    style_classname(Crails::cast< std::string >(vars, "style_classname")), 
     classname( Crails::naming_convention.classnames(project_name))
   {}
 

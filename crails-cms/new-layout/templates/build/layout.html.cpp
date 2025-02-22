@@ -8,8 +8,8 @@ class render_LayoutPluginLayoutHtml : public Crails::Template
 public:
   render_LayoutPluginLayoutHtml(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    assets_classname(Crails::cast<std::string>(vars, "assets_classname")), 
-    style_classname(Crails::cast<std::string>(vars, "style_classname"))
+    assets_classname(Crails::cast< std::string >(vars, "assets_classname")), 
+    style_classname(Crails::cast< std::string >(vars, "style_classname"))
   {}
 
   void render()

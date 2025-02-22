@@ -10,7 +10,7 @@ class render_ProjectControllersResourceHpp : public Crails::Template
 public:
   render_ProjectControllersResourceHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    resource_name(Crails::cast<std::string>(vars, "resource_name")), 
+    resource_name(Crails::cast< std::string >(vars, "resource_name")), 
     classname( Crails::naming_convention.classnames(resource_name + "_controller")), 
     super( "Crails::Cms::"
   + Crails::camelize(resource_name) + "Controller"

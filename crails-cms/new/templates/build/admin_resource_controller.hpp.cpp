@@ -10,10 +10,10 @@ class render_ProjectControllersAdminResourceHpp : public Crails::Template
 public:
   render_ProjectControllersAdminResourceHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    resource_name(Crails::cast<std::string>(vars, "resource_name")), 
-    local_route(Crails::cast<std::string>(vars, "local_route")), 
+    resource_name(Crails::cast< std::string >(vars, "resource_name")), 
+    local_route(Crails::cast< std::string >(vars, "local_route")), 
     classname( Crails::naming_convention.classnames("admin_" + resource_name + "_controller")), 
-    resource_traits(Crails::cast<std::string>(vars, "resource_traits",  resource_name + "_traits")), 
+    resource_traits(Crails::cast< std::string >(vars, "resource_traits",  resource_name + "_traits")), 
     traits_classname( Crails::naming_convention.classnames(resource_traits)), 
     super( "Crails::Cms::Admin"
   + Crails::camelize(resource_name)

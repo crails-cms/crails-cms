@@ -75,15 +75,15 @@ declare_renderer(plugin_webpack_config_js)
 
 ProjectRenderer::ProjectRenderer()
 {
-  add_renderer("app/main.cpp", project_app_main);
+  add_renderer("exe/server/main.cpp", project_app_main);
   add_renderer("app/routes.cpp", project_app_routes_cpp);
-  add_renderer("config/renderers.cpp", project_config_renderers);
-  add_renderer("config/request_pipe.cpp", project_config_request_pipe);
-  add_renderer("config/cms/layouts.hpp", project_config_cms_layouts_hpp);
-  add_renderer("config/cms/layouts.cpp", project_config_cms_layouts_cpp);
-  add_renderer("config/cms/menus.hpp", project_config_cms_menus_hpp);
-  add_renderer("config/cms/plugins.hpp", project_config_cms_plugins_hpp);
-  add_renderer("config/cms/plugins.cpp", project_config_cms_plugins_cpp);
+  add_renderer("app/config/renderers.cpp", project_config_renderers);
+  add_renderer("app/config/request_pipe.cpp", project_config_request_pipe);
+  add_renderer("app/config/cms/layouts.hpp", project_config_cms_layouts_hpp);
+  add_renderer("app/config/cms/layouts.cpp", project_config_cms_layouts_cpp);
+  add_renderer("app/config/cms/menus.hpp", project_config_cms_menus_hpp);
+  add_renderer("app/config/cms/plugins.hpp", project_config_cms_plugins_hpp);
+  add_renderer("app/config/cms/plugins.cpp", project_config_cms_plugins_cpp);
   add_renderer("app/models/traits.hpp", project_models_traits);
   add_renderer("app/models/model.hpp", project_models_model_hpp);
   add_renderer("app/models/model.cpp", project_models_model_cpp);

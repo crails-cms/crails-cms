@@ -15,7 +15,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#include <crails/cms/views/layout.hpp>\n#include \"home.hpp\"\n#include \"app/models/homepage.hpp\"\n#include \"lib/odb/application-odb.hxx\"\n\nusing namespace std;\n" << ( classname );
+ecpp_stream << "#include <crails/cms/views/layout.hpp>\n#include \"home.hpp\"\n#include \"app/models/homepage.hpp\"\n#include \"autogen/odb/application-odb.hxx\"\n\nusing namespace std;\n" << ( classname );
   ecpp_stream << "::" << ( classname );
   ecpp_stream << "(Crails::Context& context) : " << ( parent_class );
   ecpp_stream << "(context)\n{\n  vars[\"layout\"] = std::string(\"layouts/application\");\n}\n\nvoid " << ( classname );

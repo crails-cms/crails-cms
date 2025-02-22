@@ -14,7 +14,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#pragma once\n#include <crails/cms/views/menu.hpp>\n#include \"app/models/menu.hpp\"\n#include \"lib/odb/application-odb.hxx\"\n\nclass ApplicationMenus : public Crails::Cms::MenuManager\n{\n  SINGLETON_IMPLEMENTATION(ApplicationMenus, Crails::Cms::MenuManager)\n\n  std::shared_ptr<Crails::Cms::Menu> find_menu(const std::string& name) const override\n  {\n    return find_menu_with_type<" << ( menu_classname );
+ecpp_stream << "#pragma once\n#include <crails/cms/views/menu.hpp>\n#include \"app/models/menu.hpp\"\n#include \"autogen/odb/application-odb.hpp\"\n\nclass ApplicationMenus : public Crails::Cms::MenuManager\n{\n  SINGLETON_IMPLEMENTATION(ApplicationMenus, Crails::Cms::MenuManager)\n\n  std::shared_ptr<Crails::Cms::Menu> find_menu(const std::string& name) const override\n  {\n    return find_menu_with_type<" << ( menu_classname );
   ecpp_stream << ">(name);\n  }\n};\n";
     std::string _out_buffer = ecpp_stream.str();
     _out_buffer = this->apply_post_render_filters(_out_buffer);

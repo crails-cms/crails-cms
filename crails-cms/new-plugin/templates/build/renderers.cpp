@@ -9,9 +9,9 @@ class render_PluginAppRenderersCpp : public Crails::Template
 public:
   render_PluginAppRenderersCpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    project_name(Crails::cast<std::string>(vars, "project_name")), 
-    html_renderer_classname(Crails::cast<std::string>(vars, "html_renderer_classname")), 
-    json_renderer_classname(Crails::cast<std::string>(vars, "json_renderer_classname")), 
+    project_name(Crails::cast< std::string >(vars, "project_name")), 
+    html_renderer_classname(Crails::cast< std::string >(vars, "html_renderer_classname")), 
+    json_renderer_classname(Crails::cast< std::string >(vars, "json_renderer_classname")), 
     html_renderer_include( Crails::naming_convention.filenames(html_renderer_classname)), 
     json_renderer_include( Crails::naming_convention.filenames(json_renderer_classname))
   {}

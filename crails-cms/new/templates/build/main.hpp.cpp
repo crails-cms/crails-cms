@@ -10,8 +10,8 @@ class render_ProjectModelsModelHpp : public Crails::Template
 public:
   render_ProjectModelsModelHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
     Crails::Template(renderer, target, vars), 
-    resource_name(Crails::cast<std::string>(vars, "resource_name")), 
-    include_path(Crails::cast<std::string>(vars, "include_path",  Crails::underscore(resource_name))), 
+    resource_name(Crails::cast< std::string >(vars, "resource_name")), 
+    include_path(Crails::cast< std::string >(vars, "include_path",  Crails::underscore(resource_name))), 
     classname( Crails::naming_convention.classnames(resource_name))
   {}
 

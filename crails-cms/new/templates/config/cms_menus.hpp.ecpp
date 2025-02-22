@@ -5,7 +5,7 @@ std::string menu_classname = Crails::naming_convention.classnames("Menu");
 #pragma once
 #include <crails/cms/views/menu.hpp>
 #include "app/models/menu.hpp"
-#include "lib/odb/application-odb.hxx"
+#include "autogen/odb/application-odb.hpp"
 
 class ApplicationMenus : public Crails::Cms::MenuManager
 {
