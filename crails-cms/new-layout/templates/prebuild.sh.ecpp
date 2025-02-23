@@ -4,9 +4,9 @@ std::string @renderer_classname;
 // END LINKING
 #!/bin/sh
 
-SASS_COMMAND=node_modules/.bin/sass
-WEBPACK_COMMAND=node_modules/.bin/webpack
-CRAILS_AUTOGEN_DIR=autogen
+export SASS_COMMAND=node_modules/.bin/sass
+export WEBPACK_COMMAND=node_modules/.bin/webpack
+export CRAILS_AUTOGEN_DIR=autogen
 
 crails templates build \
   -r html \
