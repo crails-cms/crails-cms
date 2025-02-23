@@ -22,6 +22,7 @@ int NewPlugin::run()
       Crails::WithPath with_path(folder_target);
 
       generate_file(".crails");
+      generate_file(".gitignore");
       generate_file("CMakeLists.txt");
       generate_file("prebuild.sh");
       generate_file("package.json");

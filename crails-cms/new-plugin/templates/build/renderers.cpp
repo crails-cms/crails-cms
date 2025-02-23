@@ -18,8 +18,8 @@ public:
 
   void render()
   {
-ecpp_stream << "#include <crails/renderer.hpp>\n#include \"lib/renderers/" << ( html_renderer_include );
-  ecpp_stream << ".hpp\"\n#include \"lib/renderers/" << ( json_renderer_include );
+ecpp_stream << "#include <crails/renderer.hpp>\n#include \"autogen/renderers/" << ( html_renderer_include );
+  ecpp_stream << ".hpp\"\n#include \"autogen/renderers/" << ( json_renderer_include );
   ecpp_stream << ".hpp\"\n#include <iostream>\n\nstatic void initialize_renderer(const Crails::Renderers& renderers, const Crails::Renderer& source)\n{\n  for (auto it = renderers.begin() ; it != renderers.end() ; ++it)\n  {\n    const Crails::Renderer* renderer = it->get();\n\n    if (*renderer->get_mimetypes().begin() == *source.get_mimetypes().begin())\n      const_cast<Crails::Renderer*>(renderer)->merge(source);\n  }\n}\n\nvoid initialize_plugin_renderers()\n{\n  auto& renderers = Crails::Renderers::singleton::require();\n  " << ( html_renderer_classname );
   ecpp_stream << " plugin_html;\n  " << ( json_renderer_classname );
   ecpp_stream << " plugin_json;\n\n  initialize_renderer(renderers, plugin_html);\n  initialize_renderer(renderers, plugin_json);\n}\n\n";

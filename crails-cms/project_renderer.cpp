@@ -49,6 +49,7 @@ declare_renderer(project_controllers_admin_settings_hpp)
 declare_renderer(project_controllers_admin_opengraph_hpp)
 
 declare_renderer(layout_plugin_crailsfile)
+declare_renderer(layout_plugin_gitignore)
 declare_renderer(layout_plugin_cmakelists_txt)
 declare_renderer(layout_plugin_webpack_config_js)
 declare_renderer(layout_plugin_package_json)
@@ -66,6 +67,7 @@ declare_renderer(layout_plugin_editor_js)
 declare_renderer(layout_plugin_index_js)
 
 declare_renderer(plugin_crailsfile)
+declare_renderer(plugin_gitignore)
 declare_renderer(plugin_cmakelists_txt)
 declare_renderer(plugin_prebuild_sh)
 declare_renderer(plugin_package_json)
@@ -114,6 +116,7 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("app/controllers/admin/opengraph.hpp", project_controllers_admin_opengraph_hpp);
 
   add_renderer("layouts/.crails", layout_plugin_crailsfile);
+  add_renderer("layouts/.gitignore", layout_plugin_gitignore);
   add_renderer("layouts/CMakeLists.txt", layout_plugin_cmakelists_txt);
   add_renderer("layouts/package.json", layout_plugin_package_json);
   add_renderer("layouts/webpack.config.js", layout_plugin_webpack_config_js);
@@ -131,6 +134,7 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("layouts/stylesheets/_theme.scss", layout_plugin_theme_scss);
 
   add_renderer("plugins/.crails", plugin_crailsfile);
+  add_renderer("plugins/.gitignore", plugin_gitignore);
   add_renderer("plugins/CMakeLists.txt", plugin_cmakelists_txt);
   add_renderer("plugins/prebuild.sh", plugin_prebuild_sh);
   add_renderer("plugins/package.json", plugin_package_json);

@@ -7,8 +7,8 @@ std::string html_renderer_include = Crails::naming_convention.filenames(html_ren
 std::string json_renderer_include = Crails::naming_convention.filenames(json_renderer_classname);
 // END LINKING
 #include <crails/renderer.hpp>
-#include "lib/renderers/<%= html_renderer_include %>.hpp"
-#include "lib/renderers/<%= json_renderer_include %>.hpp"
+#include "autogen/renderers/<%= html_renderer_include %>.hpp"
+#include "autogen/renderers/<%= json_renderer_include %>.hpp"
 #include <iostream>
 
 static void initialize_renderer(const Crails::Renderers& renderers, const Crails::Renderer& source)

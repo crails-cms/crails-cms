@@ -157,6 +157,10 @@ $ECPP \
  -i $PLUGIN_TPL/crailsfile.ecpp \
  >  $PLUGIN_TPL/build/crailsfile.cpp
 $ECPP \
+ -n PluginGitignore \
+ -i $PLUGIN_TPL/gitignore.ecpp \
+ >  $PLUGIN_TPL/build/gitignore.cpp
+$ECPP \
  -n PluginCmakelistsTxt \
  -i $PLUGIN_TPL/CMakeLists.txt.ecpp \
  >  $PLUGIN_TPL/build/CMakeLists.txt.cpp
@@ -197,6 +201,10 @@ $ECPP \
  -n LayoutPluginCrailsfile \
  -i $PLUGIN_TPL/crailsfile.ecpp \
  >  $PLUGIN_TPL/build/crailsfile.cpp
+$ECPP \
+ -n LayoutPluginGitignore \
+ -i $PLUGIN_TPL/gitignore.ecpp \
+ >  $PLUGIN_TPL/build/gitignore.cpp
 $ECPP \
  -n LayoutPluginCmakelistsTxt \
  -i $PLUGIN_TPL/CMakeLists.txt.ecpp \

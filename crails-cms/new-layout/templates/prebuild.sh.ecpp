@@ -6,6 +6,7 @@ std::string @renderer_classname;
 
 SASS_COMMAND=node_modules/.bin/sass
 WEBPACK_COMMAND=node_modules/.bin/webpack
+CRAILS_AUTOGEN_DIR=autogen
 
 crails templates build \
   -r html \
@@ -28,7 +29,7 @@ $SASS_COMMAND -s compressed "stylesheets/admin.scss"  > build/sass/admin.css
 
 crails-builtin-assets \
   --inputs "javascripts" "build/sass" "stylesheets/fonts" \
-  --output "lib/assets" \
+  --output "autogen/assets" \
   --classname "<%= assets_classname %>" \
   --compression "gzip" \
   --uri-root "/cms/plugins/<%= project_name %>/assets/"
