@@ -18,6 +18,7 @@
 #include "controllers/admin/wizard.hpp"
 #include "controllers/admin/attachment.hpp"
 #include "controllers/admin/opengraph.hpp"
+#include "controllers/admin/injectable_preview.hpp"
 #define register_cms_routes(METHOD, CONTROLLER) \
   std::bind(&Crails::Cms::Routes::METHOD<CONTROLLER>, &cms_routes, std::ref(*this))
 
@@ -48,5 +49,6 @@ ApplicationRouter::ApplicationRouter()
     scope("/pages",       [&]() { cms_routes.register_page_admin_routes<<%= CLASSNAME(PageController) %>, <%= CLASSNAME(AdminPageController) %>>(*this); });
     scope("/wizard",      <%= CMS_ROUTES(register_wizard_routes,            AdminWizardController) %>);
     cms_routes.register_opengraph_routes<OpenGraphController>(*this);
+    cms_routes.register_injectable_routes<InjectableRoutes>(*this);
   });
 }

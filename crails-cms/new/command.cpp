@@ -141,7 +141,7 @@ void New::generate_admin_controllers()
   generate_file("app/controllers/admin/application.hpp");
   generate_file("app/controllers/admin/opengraph.hpp");
   generate_file("app/controllers/admin/settings.hpp");
-  generate_file("app/controllers/admin/opengraph.hpp");
+  generate_file("app/controllers/admin/injectable_preview.hpp");
   for (std::string resource_name : controllers)
   {
     renderer.vars["local_route"] = Crails::pluralize(resource_name);

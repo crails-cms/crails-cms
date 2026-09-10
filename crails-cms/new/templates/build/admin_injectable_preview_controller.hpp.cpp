@@ -1,0 +1,40 @@
+#include <sstream>
+#include "crails/render_target.hpp"
+#include "crails/shared_vars.hpp"
+#include "crails/template.hpp"
+#include <crails/cli/conventions.hpp>
+
+class render_ProjectControllersAdminInjectablePreviewHpp : public Crails::Template
+{
+public:
+  render_ProjectControllersAdminInjectablePreviewHpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars) :
+    Crails::Template(renderer, target, vars), 
+    class_name( Crails::naming_convention.classnames("InjectablePreviewController")), 
+    user_class( Crails::naming_convention.classnames("User")), 
+    super( Crails::naming_convention.classnames("AdminApplicationController"))
+  {}
+
+  void render()
+  {
+ecpp_stream << "#pragma once\n#include <crails/cms/controllers/admin/injectable_preview.hpp>\n#include \"app/models/user.hpp\"\n#include \"application.hpp\"\n\nclass " << ( class_name );
+  ecpp_stream << " : public Crails::Cms::InjectablePreviewController<" << ( user_class );
+  ecpp_stream << ", " << ( super );
+  ecpp_stream << ">\n{\n  typedef Crails::Cms::InjectablePreviewController<" << ( user_class );
+  ecpp_stream << ", " << ( super );
+  ecpp_stream << "> Super;\npublic:\n  " << ( class_name );
+  ecpp_stream << "(Crails::Context& context) : Super(context)\n  {\n  }\n};\n\n";
+    std::string _out_buffer = ecpp_stream.str();
+    _out_buffer = this->apply_post_render_filters(_out_buffer);
+    this->target.set_body(_out_buffer);
+  }
+private:
+  std::stringstream ecpp_stream;
+  std::string class_name;
+  std::string user_class;
+  std::string super;
+};
+
+void render_project_controllers_admin_injectable_preview_hpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars)
+{
+  render_ProjectControllersAdminInjectablePreviewHpp(renderer, target, vars).render();
+}

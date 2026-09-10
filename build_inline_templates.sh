@@ -147,6 +147,10 @@ $ECPP \
  -n ProjectControllersAdminOpengraphHpp \
  -i $PROJECT_TPL/controllers/admin/opengraph.hpp.ecpp \
  >  $PROJECT_TPL/build/admin_opengraph_controller.hpp.cpp
+$ECPP \
+ -n ProjectControllersAdminInjectablePreviewHpp \
+ -i $PROJECT_TPL/controllers/admin/injectable_preview.hpp.ecpp \
+ >  $PROJECT_TPL/build/admin_injectable_preview_controller.hpp.cpp
 
 ##
 ## Plugin template
