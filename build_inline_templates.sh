@@ -173,6 +173,14 @@ $ECPP \
  -i $PLUGIN_TPL/prebuild.sh.ecpp \
  >  $PLUGIN_TPL/build/prebuild.sh.cpp
 $ECPP \
+ -n PluginPrebuildFixOdbAwk \
+ -i $PLUGIN_TPL/prebuild-fix-odb.awk.ecpp \
+ >  $PLUGIN_TPL/build/prebuild-fix-odb.awk.cpp
+$ECPP \
+ -n PluginPrebuildSchemaAwk \
+ -i $PLUGIN_TPL/prebuild-schema.awk.ecpp \
+ >  $PLUGIN_TPL/build/prebuild-schema.awk.cpp
+$ECPP \
  -n PluginPackageJson \
  -i $PLUGIN_TPL/package.json.ecpp \
  >  $PLUGIN_TPL/build/package.json.cpp

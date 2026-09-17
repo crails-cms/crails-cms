@@ -1,0 +1,32 @@
+BEGIN { RS = ";" }
+{
+  raw = $0
+  gsub(/^[ \t\r\n]+/, "", raw)
+  gsub(/[ \t\r\n]+$/, "", raw)
+  if (raw == "") next
+
+  m = 0
+  n = split(raw, arr, "\n")
+  for (i = 1; i <= n; i++) {
+    l = arr[i]
+    gsub(/^[ \t\r]+/, "", l)
+    gsub(/[ \t\r]+$/, "", l)
+    if (l != "") { m++; clean[m] = l }
+  }
+  if (m == 0) next
+
+  is_drop = (clean[1] ~ /^DROP/)
+  if ((mode == "install" && is_drop) || (mode == "uninstall" && !is_drop)) { delete clean; next }
+
+  clean[m] = clean[m] ";"
+
+  out = "  database.execute(\""
+  for (i = 1; i <= m; i++) {
+    l = clean[i]
+    gsub(/\\/, "\\\\", l)
+    gsub(/"/, "\\\"", l)
+    out = out (i > 1 ? "\"\n    \" " : "") l
+  }
+  print out "\");"
+  delete clean
+}

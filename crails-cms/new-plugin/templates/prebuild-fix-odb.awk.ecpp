@@ -1,0 +1,21 @@
+function resolves(inc,    n, dirs, i) {
+  if (system("test -f \"" owndir "/" inc "\"") == 0) return 1
+  n = split(searchdirs, dirs, " ")
+  for (i = 1; i <= n; i++)
+    if (system("test -f \"" dirs[i] "/" inc "\"") == 0) return 1
+  return 0
+}
+{
+  line = $0
+  if (line ~ /^[ \t]*#include[ \t]*["<][^">]+-odb\.hxx[">][ \t]*$/) {
+    inc = line
+    sub(/^[ \t]*#include[ \t]*["<]/, "", inc)
+    sub(/[">][ \t]*$/, "", inc)
+    if (!resolves(inc)) next
+  }
+  print line
+  if (!inserted && line ~ /^[ \t]*#include/) {
+    print bridge
+    inserted = 1
+  }
+}
