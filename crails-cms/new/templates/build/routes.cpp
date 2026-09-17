@@ -15,7 +15,7 @@ public:
 
   void render()
   {
-ecpp_stream << "#include <crails/cms/routes.hpp>\n#include \"config/router.hpp\"\n#include \"autogen/odb/application-odb.hpp\"\n#include \"controllers/home.hpp\"\n#include \"controllers/signin.hpp\"\n#include \"controllers/page.hpp\"\n#include \"controllers/attachment.hpp\"\n#include \"controllers/admin/page.hpp\"\n#include \"controllers/admin/user.hpp\"\n#include \"controllers/admin/user_group.hpp\"\n#include \"controllers/admin/menu.hpp\"\n#include \"controllers/admin/settings.hpp\"\n#include \"controllers/admin/wizard.hpp\"\n#include \"controllers/admin/attachment.hpp\"\n#include \"controllers/admin/opengraph.hpp\"\n#include \"controllers/admin/injectable_preview.hpp\"\n#define register_cms_routes(METHOD, CONTROLLER) \\\n  std::bind(&Crails::Cms::Routes::METHOD<CONTROLLER>, &cms_routes, std::ref(*this))\n\nApplicationRouter::ApplicationRouter()\n{\n  auto& cms_routes = Crails::Cms::Routes::singleton::require();\n\n  match_action(\"GET\", \"/\", " << ( CLASSNAME(HomeController) );
+ecpp_stream << "#include <crails/cms/routes.hpp>\n#include \"config/router.hpp\"\n#include \"autogen/odb/application-odb.hpp\"\n#include \"controllers/home.hpp\"\n#include \"controllers/signin.hpp\"\n#include \"controllers/page.hpp\"\n#include \"controllers/attachment.hpp\"\n#include \"controllers/admin/page.hpp\"\n#include \"controllers/admin/user.hpp\"\n#include \"controllers/admin/user_group.hpp\"\n#include \"controllers/admin/menu.hpp\"\n#include \"controllers/admin/settings.hpp\"\n#include \"controllers/admin/wizard.hpp\"\n#include \"controllers/admin/attachment.hpp\"\n#include \"controllers/admin/opengraph.hpp\"\n#include \"controllers/admin/injectable_preview.hpp\"\n#include \"controllers/admin/injectable_param_options.hpp\"\n#define register_cms_routes(METHOD, CONTROLLER) \\\n  std::bind(&Crails::Cms::Routes::METHOD<CONTROLLER>, &cms_routes, std::ref(*this))\n\nApplicationRouter::ApplicationRouter()\n{\n  auto& cms_routes = Crails::Cms::Routes::singleton::require();\n\n  match_action(\"GET\", \"/\", " << ( CLASSNAME(HomeController) );
   ecpp_stream << ", index);\n  signin_actions(\"/session\", ::" << ( CLASSNAME(SessionController) );
   ecpp_stream << ");\n\n  Crails::Cms::initialize_cms_routes(*this);\n\n  scope(\"/pages\", " << ( CMS_ROUTES(register_page_routes, PageController) );
   ecpp_stream << ");\n\n  scope(\"/attachments\", [&]()\n  {\n    cms_routes.register_attachments_routes<" << ( CLASSNAME(AttachmentController) );
@@ -28,7 +28,7 @@ ecpp_stream << "#include <crails/cms/routes.hpp>\n#include \"config/router.hpp\"
   ecpp_stream << ");\n    scope(\"/pages\",       [&]() { cms_routes.register_page_admin_routes<" << ( CLASSNAME(PageController) );
   ecpp_stream << ", " << ( CLASSNAME(AdminPageController) );
   ecpp_stream << ">(*this); });\n    scope(\"/wizard\",      " << ( CMS_ROUTES(register_wizard_routes,            AdminWizardController) );
-  ecpp_stream << ");\n    cms_routes.register_opengraph_routes<OpenGraphController>(*this);\n    cms_routes.register_injectable_routes<InjectableRoutes>(*this);\n  });\n}\n";
+  ecpp_stream << ");\n    cms_routes.register_opengraph_routes<OpenGraphController>(*this);\n    cms_routes.register_injectable_routes<InjectablePreviewController, InjectableParamOptionsController>(*this);\n  });\n}\n";
     std::string _out_buffer = ecpp_stream.str();
     _out_buffer = this->apply_post_render_filters(_out_buffer);
     this->target.set_body(_out_buffer);

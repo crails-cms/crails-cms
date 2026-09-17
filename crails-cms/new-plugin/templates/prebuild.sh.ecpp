@@ -118,10 +118,7 @@ for filepath in `find . -name "*.h*"` ; do
   filename=$(basename -- "$filepath")                                                                                               
   extension="${filename##*.}"                                                                                                       
   filename="${filename%.*}"                                                                                                         
-  target=
-  echo "try $filename -> $filepath"
   if [ -f "$plugin_odb_path/$filename-odb.hxx" ] ; then                                                                             
-    echo "yes"
     echo "#include \"$filename-odb.hxx\"" >> "$plugin_odb_hpp"                                                                      
   fi                                                                                                                                
 done                                                                                                                                
