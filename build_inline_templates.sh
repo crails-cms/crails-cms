@@ -151,6 +151,10 @@ $ECPP \
  -n ProjectControllersAdminInjectablePreviewHpp \
  -i $PROJECT_TPL/controllers/admin/injectable_preview.hpp.ecpp \
  >  $PROJECT_TPL/build/admin_injectable_preview_controller.hpp.cpp
+$ECPP \
+ -n ProjectControllersAdminInjectableParamOptionsHpp \
+ -i $PROJECT_TPL/controllers/admin/injectable_param_options.hpp.ecpp \
+ >  $PROJECT_TPL/build/admin_injectable_param_options_controller.hpp.cpp
 
 ##
 ## Plugin template

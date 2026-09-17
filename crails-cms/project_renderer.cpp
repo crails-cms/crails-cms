@@ -47,6 +47,8 @@ declare_renderer(project_controllers_admin_application_hpp)
 declare_renderer(project_controllers_admin_resource_hpp)
 declare_renderer(project_controllers_admin_settings_hpp)
 declare_renderer(project_controllers_admin_opengraph_hpp)
+declare_renderer(project_controllers_admin_injectable_preview_hpp)
+declare_renderer(project_controllers_admin_injectable_param_options_hpp)
 
 declare_renderer(layout_plugin_crailsfile)
 declare_renderer(layout_plugin_gitignore)
@@ -116,6 +118,8 @@ ProjectRenderer::ProjectRenderer()
   add_renderer("app/controllers/admin/resource.hpp", project_controllers_admin_resource_hpp);
   add_renderer("app/controllers/admin/settings.hpp", project_controllers_admin_settings_hpp);
   add_renderer("app/controllers/admin/opengraph.hpp", project_controllers_admin_opengraph_hpp);
+  add_renderer("app/controllers/admin/injectable_preview.hpp", project_controllers_admin_injectable_preview_hpp);
+  add_renderer("app/controllers/admin/injectable_param_options.hpp", project_controllers_admin_injectable_param_options_hpp);
 
   add_renderer("layouts/.crails", layout_plugin_crailsfile);
   add_renderer("layouts/.gitignore", layout_plugin_gitignore);
