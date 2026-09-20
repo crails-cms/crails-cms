@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -24,6 +24,8 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(1350);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#pragma once\n#include <crails/cms/controllers/admin/" << ( resource_name );
   ecpp_stream << ".hpp>\n#include \"application.hpp\"\n#include \"app/models/" << ( Crails::naming_convention.filenames(resource_traits) );
   ecpp_stream << ".hpp\"\n\nclass " << ( classname );
@@ -32,12 +34,12 @@ ecpp_stream << "#pragma once\n#include <crails/cms/controllers/admin/" << ( reso
   ecpp_stream << " Super;\npublic:\n  static constexpr const char* scope = \"" << ( local_route );
   ecpp_stream << "\";\n\n  " << ( classname );
   ecpp_stream << "(Crails::Context& context) : Super(context)\n  {\n    vars[\"local_route\"] = std::string(Super::scope) + '/' + scope;\n  }\n};\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string resource_name;
   std::string local_route;
   std::string classname;

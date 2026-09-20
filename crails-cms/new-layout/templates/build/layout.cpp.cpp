@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -18,6 +18,8 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(1694);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#include \"layout.hpp\"\n#include \"style.hpp\"\n#include \"lib/assets.hpp\"\n" << ( classname );
   ecpp_stream << "::" << ( classname );
   ecpp_stream << "()\n{\n  name = \"" << ( Crails::naming_convention.filenames(project_name) );
@@ -28,12 +30,12 @@ ecpp_stream << "#include \"layout.hpp\"\n#include \"style.hpp\"\n#include \"lib/
   ecpp_stream << "::editor_js);\n}\n\nconst Crails::Cms::Style& " << ( classname );
   ecpp_stream << "::get_style() const\n{\n  static const " << ( style_classname );
   ecpp_stream << " style;\n  return style;\n}\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string project_name;
   std::string layout_editor_name;
   std::string assets_classname;

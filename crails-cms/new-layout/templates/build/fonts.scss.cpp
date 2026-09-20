@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -13,14 +13,16 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(642);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "/* \n * Example:\n * N.B: font.ttf should be stored in the stylesheets/fonts folder\n\n@font-face {\n  font-family: \"Font Family Name\";\n  src: url(\"/cms/plugins/" << ( project_name );
   ecpp_stream << "/assets/font.ttf\") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n*/\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string project_name;
 };
 

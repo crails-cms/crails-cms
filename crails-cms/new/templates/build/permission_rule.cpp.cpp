@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -17,6 +17,8 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(3336);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#include \"" << ( Crails::naming_convention.filenames("permission_rule") );
   ecpp_stream << ".hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n#include <crails/odb/any.hpp>\n\nodb_instantiable_impl(PermissionRule)\n\nusing namespace Crails;\nusing namespace std;\n\nstatic const map<string, PermissionRule::PermissionSetter> permission_setters = {\n  {\"read_groups\",    &PermissionRule::set_read_groups<vector<" << ( group_classname );
   ecpp_stream << ">>},\n  {\"write_groups\",   &PermissionRule::set_write_groups<vector<" << ( group_classname );
@@ -29,12 +31,12 @@ ecpp_stream << "#include \"" << ( Crails::naming_convention.filenames("permissio
   ecpp_stream << ">(groups, make_group_query(ids));\n  (this->*setter)(Odb::to_vector<" << ( group_classname );
   ecpp_stream << ">(groups));\n}\n\nvoid " << ( classname );
   ecpp_stream << "::edit(Data data)\n{\n  for (auto it = permission_setters.begin() ; it != permission_setters.end() ; ++it)\n  {\n    Data group_ids = data[it->first];\n\n    if (group_ids.exists())\n      set_groups(group_ids, it->second);\n  }\n}\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string resource_name;
   std::string classname;
   std::string group_classname;

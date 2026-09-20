@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -18,18 +18,20 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(1418);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#include <crails/signin/session_controller.hpp>\n#include <crails/odb/controller.hpp>\n#include \"application.hpp\"\n#include \"../models/user.hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n\nclass " << ( classname );
   ecpp_stream << " : public " << ( super );
   ecpp_stream << "\n{\n  typedef " << ( super );
   ecpp_stream << " Super;\npublic:\n  " << ( classname );
   ecpp_stream << "(Crails::Context&);\n\n  void new_();\n  void on_session_created() override;\n  void on_session_destroyed() override;\n  void on_session_not_created() override;\n\nprivate:\n  std::shared_ptr<" << ( Crails::naming_convention.classnames("User") );
   ecpp_stream << "> find_user() override;\n};\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string classname;
   std::string super;
 };

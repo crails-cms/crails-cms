@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -15,6 +15,8 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(2596);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#pragma once\n#include \"" << ( Crails::naming_convention.filenames("settings") );
   ecpp_stream << ".hpp\"\n#include \"" << ( Crails::naming_convention.filenames("page") );
   ecpp_stream << ".hpp\"\n\n#pragma db view object(" << ( settings_classname );
@@ -30,12 +32,12 @@ ecpp_stream << "#pragma once\n#include \"" << ( Crails::naming_convention.filena
   ecpp_stream << "::homepage_id == " << ( page_classname );
   ecpp_stream << "::id)\n  struct Count\n  {\n    #pragma db column(\"count(\" + " << ( settings_classname );
   ecpp_stream << "::id + \")\")\n    size_t value;\n  };\n};\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string settings_classname;
   std::string page_classname;
 };

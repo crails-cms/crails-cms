@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -15,16 +15,18 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(1944);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#!/bin/sh\n\nexport SASS_COMMAND=node_modules/.bin/sass\nexport WEBPACK_COMMAND=node_modules/.bin/webpack\nexport CRAILS_AUTOGEN_DIR=autogen\n\ncrails templates build \\\n  -r html \\\n  -i views \\\n  -t Crails::HtmlTemplate \\\n  -z crails/html_template.hpp \\\n  -n " << ( renderer_classname );
   ecpp_stream << " \\\n  -p \\.html$ \\\n  -v\n\nmkdir -p build/javascripts\nmkdir -p build/sass\n\nnpm install\n$WEBPACK_COMMAND\ncp javascripts/editor.js build/javascripts/editor.js\n\n$SASS_COMMAND -s compressed \"stylesheets/layout.scss\" > build/sass/layout.css\n$SASS_COMMAND -s compressed \"stylesheets/admin.scss\"  > build/sass/admin.css\n\ncrails-builtin-assets \\\n  --inputs \"javascripts\" \"build/sass\" \"stylesheets/fonts\" \\\n  --output \"autogen/assets\" \\\n  --classname \"" << ( assets_classname );
   ecpp_stream << "\" \\\n  --compression \"gzip\" \\\n  --uri-root \"/cms/plugins/" << ( project_name );
   ecpp_stream << "/assets/\"\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string project_name;
   std::string assets_classname;
   std::string renderer_classname;

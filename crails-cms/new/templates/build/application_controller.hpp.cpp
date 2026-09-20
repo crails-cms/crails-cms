@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -14,16 +14,18 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(916);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#pragma once\n#include <crails/cms/controllers/controller.hpp>\n#include \"app/models/" << ( Crails::naming_convention.filenames("settings") );
   ecpp_stream << ".hpp\"\n\nclass " << ( classname );
   ecpp_stream << " : public Crails::Cms::Controller\n{\npublic:\n  void initialize();\nprotected:\n  " << ( classname );
   ecpp_stream << "(Crails::Context&);\n\n  virtual std::shared_ptr<Crails::Cms::Settings> find_settings() override;\n};\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string classname;
 };
 

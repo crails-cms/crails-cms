@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -16,17 +16,19 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(1288);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#include \"layout.hpp\"\n#include \"lib/assets.hpp\"\n#include \"lib/renderers/" << ( Crails::naming_convention.filenames(renderer_classname) );
   ecpp_stream << ".hpp\"\n\nextern \"C\"\n{\n  Crails::BuiltinAssets* get_assets()\n  {\n    static " << ( assets_classname );
   ecpp_stream << " assets;\n    return &assets;\n  }\n\n  Crails::Renderer* get_html_renderer()\n  {\n    static " << ( renderer_classname );
   ecpp_stream << " renderer;\n    return &renderer;\n  }\n\n  Crails::Cms::Layout* create_layout()\n  {\n    return new " << ( Crails::naming_convention.classnames(project_name) );
   ecpp_stream << "();\n  }\n}\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
   std::string project_name;
   std::string assets_classname;
   std::string renderer_classname;

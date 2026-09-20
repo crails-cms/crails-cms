@@ -1,4 +1,4 @@
-#include <sstream>
+#include <crails/template_stream.hpp>
 #include "crails/render_target.hpp"
 #include "crails/shared_vars.hpp"
 #include "crails/template.hpp"
@@ -12,13 +12,15 @@ public:
 
   void render()
   {
+    ecpp_stream.reserve(1052);
+    // BEGIN TEMPLATE BODY
 ecpp_stream << "#include <crails/odb/connection.hpp>\n\nvoid install_plugin_database()\n{\n  Crails::Odb::Connection database;\n\n  database.transaction.require(\"odb\");\n  // insert table creation here\n  // Example:\n  //\n  //  database.execute(\n  //    \"CREATE TABLE \\\"Plugin_ClassName\\\" ();\"\n  //  );\n  //\n  database.commit();\n}\n\nvoid uninstall_plugin_database()\n{\n  Crails::Odb::Connection database;\n\n  database.transaction.require(\"odb\");\n  // insert table droping here\n  database.commit();\n}\n";
-    std::string _out_buffer = ecpp_stream.str();
-    _out_buffer = this->apply_post_render_filters(_out_buffer);
-    this->target.set_body(_out_buffer);
+    // END TEMPLATE BODY
+    std::string _out_buffer = std::move(ecpp_stream).extract();
+    this->target.set_body(this->apply_post_render_filters(std::move(_out_buffer)));
   }
 private:
-  std::stringstream ecpp_stream;
+  Crails::TemplateStream ecpp_stream;
 };
 
 void render_plugin_app_database_cpp(const Crails::Renderer& renderer, Crails::RenderTarget& target, Crails::SharedVars& vars)
