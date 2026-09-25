@@ -15,12 +15,12 @@ public:
 
   void render()
   {
-    ecpp_stream.reserve(3328);
+    ecpp_stream.reserve(3398);
     // BEGIN TEMPLATE BODY
 ecpp_stream << "#include <crails/cms/views/layout.hpp>\n#include \"home.hpp\"\n#include \"app/models/homepage.hpp\"\n#include \"app/autogen/odb/application-odb.hpp\"\n\nusing namespace std;\n" << ( classname );
   ecpp_stream << "::" << ( classname );
   ecpp_stream << "(Crails::Context& context) : " << ( parent_class );
-  ecpp_stream << "(context)\n{\n  vars[\"layout\"] = std::string(\"layouts/application\");\n}\n\nvoid " << ( classname );
+  ecpp_stream << "(context)\n{\n  vars[\"database\"] = &database;\n  vars[\"layout\"] = std::string(\"layouts/application\");\n}\n\nvoid " << ( classname );
   ecpp_stream << "::initialize()\n{\n  " << ( parent_class );
   ecpp_stream << "::initialize();\n  if (!settings)\n    redirect_to(\"/admin/wizard\");\n}\n\nvoid " << ( classname );
   ecpp_stream << "::index()\n{\n  if (page)\n  {\n    const Crails::Cms::Layout& layout = page->get_layout();\n    string layout_path = layout.get_layout_path();\n    string page_view = \"pages/show\";\n\n    if (!layout_path.length()) \n      layout_path = settings->get_layout().get_layout_path();\n    if (layout.get_type() == Crails::Cms::DocumentLayoutType)\n      page_view = \"pages/document\";\n    prepare_open_graph(*page);\n    vars[\"layout\"] = layout_path;\n    vars[\"render_footer\"] = !page->get_has_footer();\n    render(page_view, {\n      {\"page\", reinterpret_cast<const Crails::Cms::Page*>(page.get())}\n    });\n  }\n  else\n    render(TEXT, \"No homepage set\");\n}\n\nshared_ptr<Crails::Cms::Settings> " << ( classname );

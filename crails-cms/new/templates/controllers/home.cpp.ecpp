@@ -13,6 +13,7 @@ using namespace std;
 
 <%= classname %>::<%= classname %>(Crails::Context& context) : <%= parent_class %>(context)
 {
+  vars["database"] = &database;
   vars["layout"] = std::string("layouts/application");
 }
 

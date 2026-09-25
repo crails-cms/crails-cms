@@ -1,4 +1,20 @@
-BEGIN { RS = ";" }
+BEGIN { RS = ";"; have_table = 0 }
+
+# Emits one escaped, line-continued C++ string literal wrapped in
+# `prefix "..." suffix`, built from the `clean[1..m]` lines of the
+# current statement. Mirrors the exact formatting the old script used
+# (four-space-indented continuation lines) so generated diffs stay small.
+function emit_statement(prefix, suffix,    i, l, out) {
+  out = prefix "\""
+  for (i = 1; i <= m; i++) {
+    l = clean[i]
+    gsub(/\\/, "\\\\", l)
+    gsub(/"/, "\\\"", l)
+    out = out (i > 1 ? "\"\n    \" " : "") l
+  }
+  print out "\"" suffix
+}
+
 {
   raw = $0
   gsub(/^[ \t\r\n]+/, "", raw)
@@ -15,18 +31,33 @@ BEGIN { RS = ";" }
   }
   if (m == 0) next
 
-  is_drop = (clean[1] ~ /^DROP/)
-  if ((mode == "install" && is_drop) || (mode == "uninstall" && !is_drop)) { delete clean; next }
+  is_drop         = (clean[1] ~ /^DROP/)
+  is_create_table = (clean[1] ~ /^CREATE[ \t]+TABLE[ \t]/)
+
+  if (mode == "install"   &&  is_drop) { delete clean; next }
+  if (mode == "uninstall" && !is_drop) { delete clean; next }
 
   clean[m] = clean[m] ";"
 
-  out = "  database.execute(\""
-  for (i = 1; i <= m; i++) {
-    l = clean[i]
-    gsub(/\\/, "\\\\", l)
-    gsub(/"/, "\\\"", l)
-    out = out (i > 1 ? "\"\n    \" " : "") l
+  if (mode == "uninstall") {
+    # Uninstall never goes through SchemaMigrator: it's a plain, immediate
+    # DROP, not something to diff against the live schema.
+    emit_statement("  database.execute(", ");")
+  } else if (is_create_table) {
+    emit_statement("  schema.push_back(Crails::Odb::SchemaMigrator::Table::from_create_query(", "));")
+    have_table = 1
+  } else {
+    # Anything else in an install file (CREATE INDEX, CREATE UNIQUE INDEX,
+    # ALTER TABLE ... ADD CONSTRAINT, ...) belongs to whichever table was
+    # most recently declared in this same file, per how odb lays out its
+    # generated .sql: a table's indexes and constraints are emitted right
+    # after that table's own CREATE TABLE, before the next table starts.
+    if (!have_table) {
+      print "prebuild-schema.awk: " FILENAME ": statement appears before any CREATE TABLE, can't attach it to a table:" > "/dev/stderr"
+      print "  " clean[1] > "/dev/stderr"
+      exit 1
+    }
+    emit_statement("  schema.back().extra_statements.push_back(", ");")
   }
-  print out "\");"
   delete clean
 }
