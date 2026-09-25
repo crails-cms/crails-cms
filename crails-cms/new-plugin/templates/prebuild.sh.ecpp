@@ -145,9 +145,11 @@ emit() {
   echo 'void install_plugin_database()'
   echo '{'
   echo '  Crails::Odb::Connection database;'
+  echo '  std::vector<Crails::Odb::SchemaMigrator::Table> schema;'
   echo
-  echo '  database.transaction.require("odb");'
   emit install
+  echo '  database.transaction().require("odb");'
+  echo '  Crails::Odb::SchemaMigrator::pgsql_sync(database, schema);'
   echo '  database.commit();'
   echo '}'
   echo
@@ -155,7 +157,7 @@ emit() {
   echo '{'
   echo '  Crails::Odb::Connection database;'
   echo
-  echo '  database.transaction.require("odb");'
+  echo '  database.transaction().require("odb");'
   emit uninstall
   echo '  database.commit();'
   echo '}'
