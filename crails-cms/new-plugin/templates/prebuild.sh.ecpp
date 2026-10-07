@@ -127,7 +127,7 @@ cd -
 ##
 ## Generate database migration
 ##
-set -e
+set -x
 output="app/database.cpp"
 
 strip_comments() { sed '/\/\*/,/\*\//d' "$1"; }
